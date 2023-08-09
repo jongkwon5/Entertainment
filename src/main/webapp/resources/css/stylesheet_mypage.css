@@ -1,0 +1,236 @@
+@charset "UTF-8";
+@font-face {
+  font-family: "TheJamsil5Bold";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302_01@1.0/TheJamsil5Bold.woff2")
+    format("woff2");
+  font-weight: bold;
+  font-style: unset;
+}
+@font-face {
+  font-family: "HSBombaram";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/HSBombaram.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+* {
+  list-style: none;
+}
+a {
+  text-decoration-line: none;
+  color: black;
+}
+
+.container {
+  padding: 0px;
+  margin: 0px;
+  height: 100%;
+  width: 100%;
+}
+body {
+  font-family: "TheJamsil5Bold";
+  margin: 0;
+  color: white;
+}
+
+
+
+/* <!-- ************************상단***************************** --> */
+
+/* <!-- ************************메인***************************** --> */
+
+.main {
+
+  width: 600px;
+	left:50%;
+   transform: translate(-50%);
+position:relative;
+height:calc(100vh - 175px);
+margin-top:55px;
+  color: black;
+}
+#signup_top {
+  padding: 0px;
+}
+.main > h2 {
+  font-size: 30px;
+  border-bottom: 5px solid black;
+  text-align: center;
+  line-height: 1;
+  padding: 0 0 25px;
+}
+.main li {
+  padding: 13px;
+  /* text-align: center; 전체 가운데 정렬 정렬 */
+}
+#signup_box1 {
+  width: 100%;
+  justify-content: center;
+  text-align: center;
+}
+#signup_box1 li {
+  width: 95%;
+}
+#signup_box1 input {
+  width: 75%;
+}
+#signup_box1 button {
+  float: right;
+  width: 20%;
+  background-color: gray;
+  border-radius: 100px;
+}
+#signup_box2 {
+  width: 100%;
+  display: flex;
+
+  align-items: center;
+}
+#signup_box2 li {
+  width: 100%;
+}
+#signup_box2 input {
+  width: 100%;
+}
+#signup_box3 {
+  width: 100%;
+}
+#signup_box3 li {
+  width: 95%;
+}
+#signup_box3 input {
+  width: 100%;
+}
+#signup_box3 button {
+  float: right;
+  width: 30%;
+  background-color: gray;
+  border-radius: 100px;
+}
+
+#main_bt {
+  position: relative;
+  width: 100%;
+  height: 47px;
+  font-size: 20px;
+  background-color: red;
+  border: 5px;
+  border-radius: 5px;
+  display: inline-block;
+}
+#signup_box4{
+	text-align: center;
+}
+
+.main input {
+  width: 100%;
+  height: 46px;
+  box-sizing: border-box;
+  text-indent: 12px;
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  font-size: 16px;
+}
+.main input[type="checkbox"] {
+  width: 5%;
+  height: 20px;
+  margin-left: -2.3px;
+  vertical-align: -6px;
+}
+#hint {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  float: right;
+  margin-top: -10px;
+  color: red;
+
+  margin-right: 5px;
+  height: 20px;
+}
+
+#file-input {
+  width: 30%;
+  display: none;
+}
+#preview {
+  width: 90%;
+  border: 1px solid black;
+  height: 80%;
+  border-radius: 10px;
+}
+
+.main li input::-webkit-input-placeholder {
+  /* input 안에 placeholder 속성주는 방법 */
+  font-size: 16px;
+  color: gray;
+}
+
+#background_box {
+  width: 100vw;
+  position: absolute;
+  opacity: 0.5;
+  background-color: gray;
+  left: 50%;
+  top: 50%;
+  z-index: -10;
+  height: 685px;
+  transform: translate(-50%, -50%);
+}
+
+#signup_button {
+  width: 100%;
+  height: 50px;
+  font-size: 20px;
+  background-color: red;
+  border: 10px;
+  border-radius: 5px;
+  box-sizing: border-box;
+  cursor: pointer;
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-transform: perspective(1px) translateZ(0);
+  transform: perspective(1px) translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  position: relative;
+  -webkit-transition-property: color;
+  transition-property: color;
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+}
+
+
+#signup_button:before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #2098d1;
+  -webkit-transform: scaleX(0);
+  transform: scaleX(0);
+  -webkit-transform-origin: 0 50%;
+  transform-origin: 0 50%;
+  -webkit-transition-property: transform;
+  transition-property: transform;
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  -webkit-transition-timing-function: ease-out;
+  transition-timing-function: ease-out;
+}
+#signup_button:hover,
+#signup_button:focus,
+#signup_button:active {
+  color: white;
+}
+#signup_button:hover:before,
+#signup_button:focus:before,
+#signup_button:active:before {
+  -webkit-transform: scaleX(1);
+  transform: scaleX(1);
+}
+
+/* <!-- ************************하단***************************** --> */

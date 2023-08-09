@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="BoardDAO">
+
+	<resultMap type="board" id="enter_Board">
+		<id property="board_number"  column="Board_Number"/>  <!-- primary key매핑 -->
+		<result property="board_user_id" column="Board_User_Id"/>
+		<result property="board_title" column="Board_Title"/>
+		<result property="board_text" column="Board_Text"/>
+		<result property="board_create_date" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp" column="Board_Create_Date"/>
+		<!-- <result property="chat_create_date" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp" column="ChattingRoom_Create_Date"/> -->
+	</resultMap>
+	
+
+
+	<select id="getBoardList" resultMap="enter_Board">
+		SELECT * FROM enter_Board ORDER BY Board_Number DESC;
+	</select>
+	
+	<select id="getSearchList" resultMap="enter_Board">
+		SELECT * FROM enter_Board 
+		<if test="search_type=='title'">
+			WHERE Board_Title Like concat('%', #{board_text}, '%')
+		</if>
+		<if test="search_type=='writer'">
+			WHERE Board_User_Id Like concat('%', #{board_text}, '%')
+		</if>
+		ORDER BY Board_Number DESC;
+	</select>
+
+	<!-- 상세검색 -->
+	<!-- <select id="getMember" resultType="member" >
+		select * from enter_user where id=#{id} and password=#{password};
+	</select>
+	
+	<insert id="insertMember" parameterType="member">
+		insert into enter_user(id, password, password2, name, email, phone) 
+			values(#{id},#{password},#{password2},#{name},#{email},#{phone});
+	</insert> -->
+</mapper>
+

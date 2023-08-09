@@ -1,0 +1,208 @@
+@charset "UTF-8";
+@font-face {
+  font-family: "TheJamsil5Bold";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302_01@1.0/TheJamsil5Bold.woff2")
+    format("woff2");
+  font-weight: bold;
+  font-style: unset;
+}
+@font-face {
+  font-family: "HSBombaram";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/HSBombaram.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+* {
+  list-style: none;
+}
+a {
+  text-decoration-line: none;
+  color: black;
+}
+
+.container {
+  padding: 0px;
+  margin: 0px;
+  height: 100vh;
+  width: 100vw;
+}
+body {
+  font-family: "TheJamsil5Bold";
+  margin: 0;
+  color: white;
+}
+
+/* <!-- **************************상단*************************** --> */
+
+/* <!-- ************************메인***************************** --> */
+#main{
+
+
+height: calc(100vh - 120px);
+width: 100vw;
+}
+
+
+
+.main_box {
+  position: absolute;
+ width: 500px;
+  height: 450px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+
+  color: black;
+}
+#login_top {
+  padding: 0px;
+}
+
+.main_box > h2 {
+  font-size: 30px;
+  border-bottom: 5px solid black;
+  text-align: center;
+  line-height: 1;
+  padding: 0 0 25px;
+}
+.main_box li {
+  padding: 13px;
+  /* text-align: center; 전체 가운데 정렬 정렬 */
+}
+
+.main_box input {
+  width: 100%;
+  height: 46px;
+  box-sizing: border-box;
+  text-indent: 12px;
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  font-size: 16px;
+}
+.main_box input[type="checkbox"] {
+  width: 10%;
+  height: 20px;
+  margin-left: -13px;
+  vertical-align: -5px;
+  margin-right: -10px;
+}
+input:focus {
+  outline: 1px solid #d50000;
+}
+
+#save {
+  font-size: 16px;
+  color: black;
+}
+#hint {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  float: right;
+  padding-top: 3.1px;
+  color: red;
+
+  height: 20px;
+}
+#main_box li input::-webkit-input-placeholder {
+  /* input 안에 placeholder 속성주는 방법 */
+  font-size: 16px;
+  color: gray;
+}
+
+#login_button {
+  width: 100%;
+  height: 50px;
+  font-size: 20px;
+  background-color: red;
+  border: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-transform: perspective(1px) translateZ(0);
+  transform: perspective(1px) translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  position: relative;
+  -webkit-transition-property: color;
+  transition-property: color;
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+}
+
+#login_button:before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #2098d1;
+  -webkit-transform: scaleX(0);
+  transform: scaleX(0);
+  -webkit-transform-origin: 0 50%;
+  transform-origin: 0 50%;
+  -webkit-transition-property: transform;
+  transition-property: transform;
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  -webkit-transition-timing-function: ease-out;
+  transition-timing-function: ease-out;
+}
+#login_button:hover,
+#login_button:focus,
+#login_button:active {
+  color: white;
+}
+#login_button:hover:before,
+#login_button:focus:before,
+#login_button:active:before {
+  -webkit-transform: scaleX(1);
+  transform: scaleX(1);
+}
+
+#login_bottom {
+  position: absolute;
+  display: flex;
+  justify-content: space-between;
+  width: 90%;
+  margin-left: 25px;
+  color: black;
+}
+#login_bottom :nth-child(1) {
+  letter-spacing: 3px;
+}
+#login_bottom :nth-child(2) {
+  padding-left: 30px;
+  letter-spacing: 1px;
+}
+#login_bottom :nth-child(3) {
+  letter-spacing: 1px;
+}
+#login_top li span {
+  font-weight: bold;
+}
+
+#login_bottom a {
+  font-size: 15px;
+}
+#login_bottom span {
+  margin-left: 35px;
+}
+#background_box {
+  width: 100vw;
+  position: absolute;
+  opacity: 0.5;
+  background-color: gray;
+  left: 50%;
+  top: 50%;
+  z-index: -10;
+  height: 500px;
+  transform: translate(-50%, -50%);
+}
+
+
+/* <!-- ************************하단***************************** --> */
