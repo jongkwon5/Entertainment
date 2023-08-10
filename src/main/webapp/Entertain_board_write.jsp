@@ -17,19 +17,26 @@
 String chk = (String)request.getAttribute("UPDATE_RESULT");%>
 
 <jsp:include page="/module/header.jsp"></jsp:include>
-	<div class="container">
-    <h1 class="title">게시글 작성</h1>
-    <form>
-      <div class="input-group">
+	 <div class="container">
+	 	<div id="main">
+	 
+    <h1>게시판</h1>
+    <form class="post-form" action="createBoard.do" method="get">
+    <input type="hidden" value="${sessionScope.userId}" name="board_user_id">
+      <div class="form-group">
         <label for="title">제목</label>
-        <input type="text" id="title" name="title" required>
+        <input type="text" id="title" name="board_title" placeholder="제목을 입력하세요" required>
       </div>
-      <div class="input-group">
+      
+      <div class="form-group">
         <label for="content">내용</label>
-        <textarea id="content" name="content" required></textarea>
+        <textarea id="content" name="board_text" placeholder="내용을 입력하세요" required></textarea>
       </div>
-      <button class="btn" type="submit">작성하기</button>
+      
+    
+      <button type="submit">글쓰기</button>
     </form>
+  </div>
   </div>
 
 <jsp:include page="/module/footer.jsp"></jsp:include>

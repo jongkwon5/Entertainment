@@ -3,6 +3,7 @@ pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@page import="java.util.Enumeration"%>
+<c:set var="context" value="${pageContext.request.contextPath}"/>
 <%request.setCharacterEncoding("utf-8");%>
 
 <!DOCTYPE html>
@@ -13,17 +14,10 @@ pageEncoding="UTF-8"%>
 <script src="https://kit.fontawesome.com/cd8f90f87a.js" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script type="text/javascript" src="http://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-<link href="<c:url value="/resources/css/stylesheet_main.css"/>" rel='stylesheet' />
+<link rel="stylesheet" href="${context}/resources/css/stylesheet_main.css"/>
 <link rel="stylesheet" type="text/css" href="http://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
 </head>
 <body>
-<% String name =(String)session.getAttribute("NAME"); 
-   	String id =(String)session.getAttribute("ID"); 
-    String login_chk = (String)request.getAttribute("UPDATE_RESULT");
-    String phota = (String)session.getAttribute("login_photo"); 
-    String photo = (String)session.getAttribute("photo");
-    String absolutePath = request.getSession().getServletContext().getRealPath("/");%>
-    
 <div class="container">
 <!--**************************** 헤더 ****************************-->
 	<div class="header">
@@ -54,27 +48,24 @@ pageEncoding="UTF-8"%>
           	<li>
 	            <a class="btn btn_board" href="Entertain_board_list.do" style="cursor: pointer">
 	            	<spring:message code="message.board"/>
-	           
 	           	</a>
           	</li>
 		</ul>
 		<ul class="header_mypage">
-		
-				<c:choose>
-					<c:when test="${empty sessionScope.NAME}">
-					
-						<div class="my_page_icon" style="background-image: url('resources/Image/Entire/default_2.png')"
-						onclick="location.href='login.do'"></div>
-					 
-					</c:when>
-					<c:otherwise>
-						<div class="my_page_icon" style="background-image: url('resources/Image/Entire/default_2.png')"
-						onclick="location.href='login.do'"></div>
-							<p id="hidden_name">${sessionScope.NAME}님</p>
-								<button name="cmd" id="logout" type="submit" onclick="location.href='logOut.do'">logout</button>
-					</c:otherwise>
-				</c:choose>
-    		
+			<c:choose>
+				<c:when test="${empty user.name}">
+					<div class="my_page_icon" style="background-image: url('resources/Image/Entire/default_2.png')"
+						onclick="location.href='login.do'">
+					</div>
+				</c:when>
+				<c:otherwise>
+					<div class="my_page_icon" style="background-image: url('resources/Image/Entire/default_2.png')"
+						onclick="location.href='Entertain_mypage.do'">
+					</div>
+					<p id="hidden_name">${user.name}님</p>
+					<button name="cmd" id="logout" type="submit" onclick="location.href='logOut.do'">logout</button>
+				</c:otherwise>
+			</c:choose>
 		</ul>
 	</div>
 <!--**************************** 메인 ****************************-->
@@ -131,7 +122,7 @@ pageEncoding="UTF-8"%>
 <!-- ****************************하단**************************** -->
 	<div class="footer">
 		<c:choose>
-			<c:when test="${sessionScope.ID == 'admin'}">
+			<c:when test="${user.id == 'admin'}">
 				<span style="float:right;margin-right: 50px; color:red;">
 					<a href="/parkJK/Entertain/view/admin_home.jsp">안녕하세요 관리자님! 환영합니다</a><br><br>
 				</span>

@@ -19,7 +19,6 @@ body {
 .container{
 	width: 100%;
 	height: calc(100vh - 120px);
-
 }
 .board {
     max-width: 1400px;
@@ -58,6 +57,7 @@ h1 {
     line-height: 16px;
     width: 4%;
     text-align: center;
+    cursor: pointer;
 }
 
 #searchType:focus{
@@ -69,6 +69,12 @@ h1 {
     text-align: center;
 }
 
+.boardList{
+	background-color:yellow;
+}
+.boardList:hover {
+	background-color: #e0e0e0;
+}
 
 #searchInput {
   
@@ -114,7 +120,7 @@ h1 {
 }
 
 .post-table th {
-    background-color: #f2f2f2;
+   
     text-align: center;
     font-family: Arial, sans-serif;
 }

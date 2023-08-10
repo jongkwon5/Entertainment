@@ -1,0 +1,94 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" session="true"%>
+<% request.setCharacterEncoding("utf-8"); %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<c:set var="context" value="${pageContext.request.contextPath}"/>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<script src="https://kit.fontawesome.com/cd8f90f87a.js" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<link rel="stylesheet" type="text/css" href="${context}/resources/css/stylesheet_board_read.css" />
+</head>
+<body>
+
+<jsp:include page="/module/header.jsp"></jsp:include>
+	 <div class="container">
+	 	<div id="main">
+	 
+    <h1>게시글</h1><hr />
+    <form class="post-form">
+    <input type="hidden" value="${board.board_user_id}" name="board_user_id">
+      <div id="board_top">
+     		<p>${board.board_title}</p>
+     		 <button type="button" id="allListButton" onclick="location.href='Entertain_board_list.do'">전체글</button>
+      </div>
+        <div id="board_middle">
+     	${board.board_user_id}&nbsp;&nbsp; | &nbsp;&nbsp;
+       ${board.board_create_date}
+      </div>
+      <div id="board_bottom">
+       ${board.board_text}
+      </div>
+      
+    
+
+     
+    </form>
+    <div class="comments">
+    <p>댓글</p><hr />
+  		<table cellpadding="0" cellspacing="0">
+			<!-- 	<tr>
+					<th>번호</th>
+	            	<th>작성자</th>
+	            	<th>내용</th>
+	            	<th>작성시간</th> -->
+				<!-- </tr> -->
+				<c:choose>
+	            	<c:when test="${empty comment}">
+	            	<tr>
+	                    	<td colspan="4" style="height: 580px; text-align: center;">작성된 댓글이 없습니다.</td>
+						</tr>
+	            	</c:when>
+	            	<c:otherwise>
+	            			<c:forEach items="${comment}" var="comment">
+	            			<tr>
+	            			<td>${comment.comment_number}</td>
+	            			<td>${comment.comment_user_id}</td>
+	            			<td>${comment.comment_text}</td>
+	            			<td>
+	            				<fmt:formatDate value="${comment.comment_create_date}" pattern="MM월 dd일 a HH시 mm분" />
+	            			</td>
+	            			</tr> 
+	            			</c:forEach>
+	            		
+	            		
+	            		
+	            	</c:otherwise>
+	            	</c:choose>
+	            	</table>
+</div>
+
+
+<div class="comment-form">
+    <h2>댓글 작성</h2>
+    <form action="createComment.do" method="get">
+    <input type="hidden" value="${board.board_number}" name="board_number">
+    <input type="hidden" value="${user.id}" name="comment_user_id">
+        <div class="form-group">
+            <textarea id="comment-text" name="comment_text" placeholder="댓글 내용" required></textarea>
+        </div>
+        <button type="submit" id="addCommentButton">댓글 추가</button>
+    </form>
+</div> 
+    
+  </div>
+  <jsp:include page="/module/footer.jsp"></jsp:include>
+  </div>
+
+
+	
+</body>
+</html>

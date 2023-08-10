@@ -17,11 +17,6 @@
 <link rel="stylesheet" type="text/css" href="${context}/resources/css/jquery.fullPage.css" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"/>
-	<% String name =(String)session.getAttribute("NAME"); 
-     String login_chk = (String)request.getAttribute("UPDATE_RESULT"); 
-     String phota = (String)session.getAttribute("login_photo"); 
-     String photo = (String)session.getAttribute("photo");
-	%>
 <script>
     $(() => {$(".swiper-slide").hover(function(){swiper1.autoplay.stop();},function(){
 				swiper1.autoplay.start();
@@ -147,20 +142,20 @@
 	          	</li>
 			</ul>
 			<ul class="header_mypage">
-				<a href="login.do">
-					<c:choose>
-						<c:when test="${empty name || empty photo}">
-							<div class="my_page_icon" style="background-image: url('resources/Image/Entire/default_2.png')"></div>
-						</c:when>
-						<c:otherwise>
-							<div class="my_page_icon" style="background-image: url(<%=phota%>)"></div>
-								<p id="hidden_name"><%= name+"님"%></p>
-								<form action="logOut.do" method="post" id="logout">
-									<button name="cmd" id="logout" type="submit"  value="member_logout">logout</button>
-								</form>
-						</c:otherwise>
-					</c:choose>
-	    		</a>
+				<c:choose>
+					<c:when test="${empty user.name}">
+						<div class="my_page_icon" style="background-image: url('resources/Image/Entire/default_2.png')"
+							onclick="location.href='login.do'">
+						</div>
+					</c:when>
+					<c:otherwise>
+						<div class="my_page_icon" style="background-image: url('resources/Image/Entire/default_2.png')"
+							onclick="location.href='Entertain_mypage.do'">
+						</div>
+						<p id="hidden_name">${user.name}님</p>
+						<button name="cmd" id="logout" type="submit" onclick="location.href='logOut.do'">logout</button>
+					</c:otherwise>
+				</c:choose>
 			</ul>
 		</div>
 	<!--****************************header****************************-->

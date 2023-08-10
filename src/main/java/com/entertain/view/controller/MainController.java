@@ -32,4 +32,10 @@ public class MainController {
 	public String audition() {
 		return "Entertain_audition.jsp";
 	}
+	
+
+	@RequestMapping(value="/Entertain_mypage.do", method=RequestMethod.GET)
+	public String myPage() {
+		return "Entertain_mypage.jsp";
+	}
 }

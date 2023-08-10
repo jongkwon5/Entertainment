@@ -12,8 +12,15 @@
 		<!-- <result property="chat_create_date" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp" column="ChattingRoom_Create_Date"/> -->
 	</resultMap>
 	
-
-
+	<resultMap type="comment" id="enter_comment">
+		<id property="comment_number"  column="Comment_Number"/>  <!-- primary key매핑 -->
+		<result property="board_number" column="Board_Number"/>
+		<result property="comment_user_id" column="Comment_User_Id"/>
+		<result property="comment_text" column="Comment_Text"/>
+		<result property="comment_create_date" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp" column="Comment_Create_Date"/>
+		<!-- <result property="chat_create_date" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp" column="ChattingRoom_Create_Date"/> -->
+	</resultMap>
+	
 	<select id="getBoardList" resultMap="enter_Board">
 		SELECT * FROM enter_Board ORDER BY Board_Number DESC;
 	</select>
@@ -29,6 +36,24 @@
 		ORDER BY Board_Number DESC;
 	</select>
 
+	<insert id="createBoard" useGeneratedKeys="true" parameterType="board">
+		insert into enter_Board(Board_Number, Board_User_Id, Board_Title, Board_Text, Board_Create_Date)values(#{board_number},#{board_user_id},#{board_title},#{board_text},now());
+	</insert>
+	
+	<select id="getOneBoard" resultMap="enter_Board">
+		SELECT * FROM enter_Board WHERE Board_Number = #{board.number};
+	</select>
+	
+	<select id="getCommentList" resultMap="enter_comment">
+		SELECT * FROM enter_comment WHERE Board_Number = #{board.number} ORDER BY Comment_Number DESC;
+	</select>
+	
+	<insert id="createComment" useGeneratedKeys="true" parameterType="comment">
+		insert into enter_comment(Comment_Number, Board_Number, Comment_User_Id, Comment_Text, Comment_Create_Date)
+		values(#{comment_number},#{board_number},#{comment_user_id},#{comment_text},now());
+	</insert>
+	
+	
 	<!-- 상세검색 -->
 	<!-- <select id="getMember" resultType="member" >
 		select * from enter_user where id=#{id} and password=#{password};

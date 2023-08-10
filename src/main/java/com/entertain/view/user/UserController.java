@@ -40,10 +40,7 @@ public class UserController{
 		MemberVO loginvo =service.getMember(vo);
 		if(loginvo != null) { //로그인 성공적으로 했다는 뜻
 			System.out.println("로그인 성공!");
-				session.setAttribute("NAME", loginvo.getName());
-				
-				session.setAttribute("a", service.getMember(vo));
-				model.addAttribute("user_info", service.getMember(vo));
+				model.addAttribute("user", service.getMember(vo));
 				returnURL = "Entertain_main.jsp"; // 로그인 성공했다는 뜻			
 		}else {
 			System.out.println("로그인 실패!");

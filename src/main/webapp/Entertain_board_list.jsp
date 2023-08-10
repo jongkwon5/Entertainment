@@ -47,7 +47,7 @@ String chk = (String)request.getAttribute("UPDATE_RESULT");%>
         </c:when>
         <c:otherwise>
             <c:forEach items="${boardList}" var="board">
-                <tr>
+                <tr class="boardList" onclick="window.location.href='getOneBoard.do?board_number=${board.board_number}'" style="cursor: pointer;">
                     <td>${board.board_number}</td>
                     <td>${board.board_user_id}</td>
                     <td>${board.board_title}</td>
