@@ -53,7 +53,23 @@
 		values(#{comment_number},#{board_number},#{comment_user_id},#{comment_text},now());
 	</insert>
 	
+	<delete id="deleteBoard" parameterType="int">
+		delete from enter_Board WHERE Board_Number = #{board.number};
+	</delete>
 	
+	<update id="updateBoard">
+		update enter_Board set Board_Title = #{board_title}, Board_Text = #{board_text} WHERE Board_Number = #{board_number};
+	</update>
+	
+	
+<!-- 	<select id="commentCount" resultType="int">
+	SELECT Board_Number,COUNT(*) + 1 AS Comment_Count
+FROM enter_comment
+WHERE Board_Number = #{board.number}
+GROUP BY Board_Number;
+	</select> -->
+	
+	</mapper>
 	<!-- 상세검색 -->
 	<!-- <select id="getMember" resultType="member" >
 		select * from enter_user where id=#{id} and password=#{password};
@@ -63,5 +79,5 @@
 		insert into enter_user(id, password, password2, name, email, phone) 
 			values(#{id},#{password},#{password2},#{name},#{email},#{phone});
 	</insert> -->
-</mapper>
+
 

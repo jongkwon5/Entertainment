@@ -18,17 +18,20 @@
 	 <div class="container">
 	 	<div id="main">
 	 
-    <h1>게시글</h1><hr />
-    <form class="post-form">
+    <h1>게시글 수정</h1><hr />
+    <form class="post-form"  action="updateBoard.do" method="get">
     <input type="hidden" value="${board.board_user_id}" name="board_user_id">
+    <input type="hidden" value="${board.board_number}" name="board_number">
       <div id="board_top">
-     		<p>${board.board_title}</p>
-     		 <button type="button" id="allListBT" onclick="location.href='Entertain_board_list.do'">전체글</button>
+     		<p>
+     		<input type="text" id="title" name="board_title" value="${board.board_title}" required>
+     		</p>
+     		 <button type="button" id="allListButton" onclick="location.href='Entertain_board_list.do'">전체글</button>
     		  <c:if test="${board.board_user_id eq user.id}">
     		  <button type="button" id="deleteBT" onclick="deleteButton(event)">글삭제</button>
-    		   <button type="button" id="updateBT" onclick="location.href='getBoardUpdate.do?board_number=${board.board_number}'">글수정</button>
+    		   <button type="button" id="updateBT" onclick="updateButton(event)">글수정</button>
     		  </c:if>
-  
+      
       </div>
         <div id="board_middle">
      	${board.board_user_id}&nbsp;&nbsp; | &nbsp;&nbsp;
@@ -36,7 +39,8 @@
   
       </div>
       <div id="board_bottom">
-       ${board.board_text}
+      <textarea id="content" name="board_text" required>${board.board_text}</textarea>
+   
       </div>
       
     
@@ -96,15 +100,25 @@
 
 
 <script>
+
+var userPassword = "${user.password}";
+var boardNumber = "${board.board_number}";
+
 function deleteButton(event){
-	var userPassword = "${user.password}";
-	var boardNumber = "${board.board_number}";
-	var passwordChk = prompt("게시글을 삭제하시려면 회원 비밀번호를 입력하세요")
+	var passwordChk = prompt("게시글을 삭제하시려면 회원 비밀번호를 입력하세요");
 	if(passwordChk === userPassword){
 	 location.href = "deleteBoard.do?board_number=" + boardNumber; 
 }else{
 	alert("비밀번호 불일치");}
 }
+
+function updateButton(event){
+	var passwordChk = prompt("게시글을 수정하시려면 회원 비밀번호를 입력하세요");
+	if(passwordChk === userPassword){
+		 $('.post-form').submit();
+	}else{
+		alert("비밀번호 불일치");}
+	}
 
 
 

@@ -50,8 +50,15 @@ public void createBoard(BoardVO vo) {
 	public void createComment(CommentVO vo) {
 		boardDAO.createComment(vo);
 	}
+	
+	public void deleteBoard(int number) {
+		boardDAO.deleteBoard(number);
+	}
 
-
+	
+	public void updateBoard(BoardVO vo) {
+		boardDAO.updateBoard(vo);
+	}
 
 	
 }

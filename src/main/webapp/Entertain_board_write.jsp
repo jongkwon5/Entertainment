@@ -22,7 +22,7 @@ String chk = (String)request.getAttribute("UPDATE_RESULT");%>
 	 
     <h1>게시판</h1>
     <form class="post-form" action="createBoard.do" method="get">
-    <input type="hidden" value="${sessionScope.userId}" name="board_user_id">
+    <input type="hidden" value="${user.id}" name="board_user_id">
       <div class="form-group">
         <label for="title">제목</label>
         <input type="text" id="title" name="board_title" placeholder="제목을 입력하세요" required>
@@ -34,7 +34,7 @@ String chk = (String)request.getAttribute("UPDATE_RESULT");%>
       </div>
       
     
-      <button type="submit">글쓰기</button>
+      <button type="submit" id="createButton">글쓰기</button>
     </form>
   </div>
   </div>
@@ -45,18 +45,15 @@ String chk = (String)request.getAttribute("UPDATE_RESULT");%>
 
 
 
-$(document).on('click', '#searchButton', function(e){
+$(document).on('click', '#createButton', function(e){
 	e.preventDefault();
-	var searchInput = $('#searchInput').val();
-	var searchType = $('#searchType').val();
-	if(searchInput == null || searchInput == ""){
+	var title = $('#title').val();
+	var content = $('#content').val();
+	if(title == null || content == ""){
 		alert("내용을 입력해주세요");
 		return;
 	}
-	var url = "getBoardSearch.do";
-	url += "?searchType=" + searchType
-	url += "&searchInput=" + searchInput
-	location.href = url;
+	 $('.post-form').submit();
 	});
 </script>
 	

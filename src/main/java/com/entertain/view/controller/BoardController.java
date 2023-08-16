@@ -40,10 +40,23 @@ public class BoardController {
 	}
 
 	@RequestMapping(value = "/boardWrite.do", method = RequestMethod.GET)
-	public String getSearchList() {
-
+	public String getboardWrite() {
 		return "Entertain_board_write.jsp";
 	}
+	
+	@RequestMapping(value = "/getBoardUpdate.do", method = RequestMethod.GET)
+	public String getBoardUpdate(@RequestParam("board_number") int board_number, Model model) {
+		model.addAttribute("board", boardService.getOneBoard(board_number));
+		model.addAttribute("comment", boardService.getCommentList(board_number));
+		return "Entertain_board_update.jsp";
+	}
+	
+	@RequestMapping(value = "/updateBoard.do", method = RequestMethod.GET)
+	public String updateBoard(BoardVO vo) {
+		boardService.updateBoard(vo);
+		return "Entertain_board_list.do";
+	}
+	
 
 	@RequestMapping(value = "/createBoard.do", method = RequestMethod.GET)
 	public String createBoard(BoardVO vo) {
@@ -67,6 +80,15 @@ public class BoardController {
 
 	  return "getOneBoard.do"; 
 	  }
+ 
+ @RequestMapping(value="/deleteBoard.do", method=RequestMethod.GET)
+	public String deleteBoard(int board_number) { 
+	 boardService.deleteBoard(board_number);
+
+	  return "Entertain_board_list.do"; 
+	  }
+ 
+ 
 	 
 
 }

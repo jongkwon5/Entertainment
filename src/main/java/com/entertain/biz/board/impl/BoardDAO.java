@@ -40,8 +40,14 @@ public class BoardDAO {
 	public void createComment(CommentVO vo) {
 		mybatis.insert("BoardDAO.createComment", vo);
 	}
-
 	
+	public void deleteBoard(int number) {
+		mybatis.delete("BoardDAO.deleteBoard", number);
+	}
+	
+	public void updateBoard(BoardVO vo) {
+		mybatis.update("BoardDAO.updateBoard", vo);
+	}
 	
 	
 }

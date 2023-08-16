@@ -15,4 +15,8 @@ public interface BoardService {
 	 List<CommentVO> getCommentList(int number);
 	
 	 void createComment(CommentVO vo);
+	 
+	 void deleteBoard(int number);
+	 
+	 void updateBoard(BoardVO vo);
 }
