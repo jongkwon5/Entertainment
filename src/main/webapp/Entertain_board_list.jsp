@@ -50,7 +50,7 @@ String chk = (String)request.getAttribute("UPDATE_RESULT");%>
                 <tr class="boardList" onclick="window.location.href='getOneBoard.do?board_number=${board.board_number}'" style="cursor: pointer;">
                     <td>${board.board_number}</td>
                     <td>${board.board_user_id}</td>
-                    <td>${board.board_title}</td>
+                    <td>${board.board_title}[${board.comment_count}]</td>
                     <td><fmt:formatDate value="${board.board_create_date}" pattern="YY년 MM월 dd일 a HH시 mm분" /></td>
                 </tr>
             </c:forEach>

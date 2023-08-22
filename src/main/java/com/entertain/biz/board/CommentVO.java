@@ -9,8 +9,22 @@ public class CommentVO {
 	private String comment_user_id;
 	private String comment_text;
 	private Timestamp comment_create_date;
+	private int board_number_count;
+	private int comment_update_count;
 
 	
+	public int getComment_update_count() {
+		return comment_update_count;
+	}
+	public void setComment_update_count(int comment_update_count) {
+		this.comment_update_count = comment_update_count;
+	}
+	public int getBoard_number_count() {
+		return board_number_count;
+	}
+	public void setBoard_number_count(int board_number_count) {
+		this.board_number_count = board_number_count;
+	}
 	public int getBoard_number() {
 		return board_number;
 	}

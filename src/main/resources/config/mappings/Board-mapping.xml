@@ -17,14 +17,19 @@
 		<result property="board_number" column="Board_Number"/>
 		<result property="comment_user_id" column="Comment_User_Id"/>
 		<result property="comment_text" column="Comment_Text"/>
+		<result property="comment_update_count" column="Commnet_Update_Count"/>
 		<result property="comment_create_date" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp" column="Comment_Create_Date"/>
 		<!-- <result property="chat_create_date" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp" column="ChattingRoom_Create_Date"/> -->
 	</resultMap>
 	
 	<select id="getBoardList" resultMap="enter_Board">
-		SELECT * FROM enter_Board ORDER BY Board_Number DESC;
+	   SELECT e.*, 
+           (SELECT COUNT(*) FROM enter_comment c WHERE c.Board_Number = e.Board_Number) AS comment_count
+    FROM enter_Board e
+    ORDER BY e.Board_Number DESC;
 	</select>
 	
+
 	<select id="getSearchList" resultMap="enter_Board">
 		SELECT * FROM enter_Board 
 		<if test="search_type=='title'">
@@ -45,7 +50,19 @@
 	</select>
 	
 	<select id="getCommentList" resultMap="enter_comment">
-		SELECT * FROM enter_comment WHERE Board_Number = #{board.number} ORDER BY Comment_Number DESC;
+		 SELECT 
+            Comment_Number,
+            Board_Number,
+            Comment_User_Id,
+            Comment_Text,
+            Comment_Create_Date,
+            Comment_Update_Count,
+            @row_number := @row_number + 1 AS Board_Number_Count
+        FROM 
+            (SELECT * FROM enter_comment WHERE Board_Number = #{board_number} ORDER BY Comment_Create_Date ASC) AS ordered_comments,
+            (SELECT @row_number := 0) AS t
+        ORDER BY 
+            Board_Number_Count DESC;
 	</select>
 	
 	<insert id="createComment" useGeneratedKeys="true" parameterType="comment">
@@ -57,9 +74,19 @@
 		delete from enter_Board WHERE Board_Number = #{board.number};
 	</delete>
 	
+ 	<delete id="deleteComment" parameterType="int">
+		delete from enter_comment WHERE Comment_Number = #{comment.number};
+	</delete>
+	
+	
 	<update id="updateBoard">
 		update enter_Board set Board_Title = #{board_title}, Board_Text = #{board_text} WHERE Board_Number = #{board_number};
 	</update>
+	
+	<update id="updateComment">
+		update enter_comment set Comment_Text = #{comment_text}, Comment_Create_Date = now(), comment_update_count = '1' WHERE Comment_Number = #{comment_number} and Board_Number = #{board_number};
+	</update>
+	
 	
 	
 <!-- 	<select id="commentCount" resultType="int">

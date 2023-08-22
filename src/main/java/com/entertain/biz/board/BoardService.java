@@ -19,4 +19,8 @@ public interface BoardService {
 	 void deleteBoard(int number);
 	 
 	 void updateBoard(BoardVO vo);
+	 
+	 void updateComment(CommentVO vo);
+	 
+	 void deleteComment(int number);
 }

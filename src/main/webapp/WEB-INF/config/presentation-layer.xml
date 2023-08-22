@@ -79,5 +79,8 @@
  				<property name="paramName" value="lang"></property>
  			</bean>
  		</mvc:interceptors>
+ 		
+ 		
+ 		<mvc:annotation-driven />
  	 
 </beans>

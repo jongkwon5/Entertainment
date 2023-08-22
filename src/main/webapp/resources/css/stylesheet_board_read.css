@@ -53,7 +53,9 @@ hr{
 #board_top{
 
 	display: flex;
-	justify-content:space-between;
+}
+#board_top > button{
+	  float: right;
 }
 #board_bottom{
 		margin-top: 8px;

@@ -49,5 +49,12 @@ public class BoardDAO {
 		mybatis.update("BoardDAO.updateBoard", vo);
 	}
 	
+	public void updateComment(CommentVO vo) {
+		mybatis.update("BoardDAO.updateComment", vo);
+	}
+	
+	public void deleteComment(int number) {
+		mybatis.delete("BoardDAO.deleteComment", number);
+	}
 	
 }

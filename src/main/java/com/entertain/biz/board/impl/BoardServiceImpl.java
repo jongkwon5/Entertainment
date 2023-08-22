@@ -50,7 +50,7 @@ public void createBoard(BoardVO vo) {
 	public void createComment(CommentVO vo) {
 		boardDAO.createComment(vo);
 	}
-	
+	@Override
 	public void deleteBoard(int number) {
 		boardDAO.deleteBoard(number);
 	}
@@ -59,6 +59,13 @@ public void createBoard(BoardVO vo) {
 	public void updateBoard(BoardVO vo) {
 		boardDAO.updateBoard(vo);
 	}
+	
+	public void updateComment(CommentVO vo) {
+		boardDAO.updateComment(vo);
+	}
 
+	public void deleteComment(int number) {
+		boardDAO.deleteComment(number);
+	}
 	
 }
