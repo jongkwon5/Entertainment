@@ -9,7 +9,21 @@ public class CommentVO {
 	private String comment_user_id;
 	private String comment_text;
 	private Timestamp comment_create_date;
-	private int board_number_count;
+	private int comment_number_count;
+	private int comment_count;
+	
+	public int getComment_count() {
+		return comment_count;
+	}
+	public void setComment_count(int comment_count) {
+		this.comment_count = comment_count;
+	}
+	public int getComment_number_count() {
+		return comment_number_count;
+	}
+	public void setComment_number_count(int comment_number_count) {
+		this.comment_number_count = comment_number_count;
+	}
 	private int comment_update_count;
 
 	
@@ -19,12 +33,7 @@ public class CommentVO {
 	public void setComment_update_count(int comment_update_count) {
 		this.comment_update_count = comment_update_count;
 	}
-	public int getBoard_number_count() {
-		return board_number_count;
-	}
-	public void setBoard_number_count(int board_number_count) {
-		this.board_number_count = board_number_count;
-	}
+
 	public int getBoard_number() {
 		return board_number;
 	}

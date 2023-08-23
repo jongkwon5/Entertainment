@@ -19,6 +19,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.entertain.biz.board.BoardVO;
 import com.entertain.biz.board.CommentVO;
 import com.entertain.biz.board.impl.BoardServiceImpl;
+import com.entertain.biz.board.Criteria;
+import com.entertain.biz.board.PageVO;
 
 @Controller
 public class BoardController {
@@ -27,9 +29,13 @@ public class BoardController {
 	private BoardServiceImpl boardService;
 
 	@RequestMapping(value = "/Entertain_board_list.do", method = RequestMethod.GET)
-	public String getBoardList(Model model, BoardVO vo) {
-		model.addAttribute("boardList", boardService.getBoardList(vo));
-
+	public String getBoardList(Model model, BoardVO vo, Criteria cri) {
+		
+		System.out.println(boardService.getBoardCount(vo));
+		int total = boardService.getBoardCount(vo);
+		
+		model.addAttribute("boardList", boardService.getBoardList(vo, cri));
+		model.addAttribute("pageMaker", new PageVO(cri, total));
 		return "Entertain_board_list.jsp";
 	}
 
@@ -53,6 +59,7 @@ public class BoardController {
 	
 	@RequestMapping(value = "/getBoardUpdate.do", method = RequestMethod.GET)
 	public String getBoardUpdate(@RequestParam("board_number") int board_number, Model model) {
+		model.addAttribute("getOneCommentCount", boardService.getOneCommentCount(board_number));
 		model.addAttribute("board", boardService.getOneBoard(board_number));
 		model.addAttribute("comment", boardService.getCommentList(board_number));
 		return "Entertain_board_update.jsp";
@@ -74,6 +81,12 @@ public class BoardController {
 
 	@RequestMapping(value = "/getOneBoard.do", method = RequestMethod.GET)
 	public String getOneBoard(@RequestParam("board_number") int board_number, Model model) {
+	
+		System.out.println("아오");
+		System.out.println(boardService.getOneCommentCount(board_number));
+		model.addAttribute("getOneCommentCount",boardService.getOneCommentCount(board_number));
+		
+		boardService.setBoardViewCount(board_number);
 		model.addAttribute("board", boardService.getOneBoard(board_number));
 		model.addAttribute("comment", boardService.getCommentList(board_number));
 		return "Entertain_board_read.jsp";

@@ -12,6 +12,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <link rel="stylesheet" type="text/css" href="${context}/resources/css/stylesheet_board_read.css" />
 </head>
+
 <body>
 
 <jsp:include page="/module/header.jsp"></jsp:include>
@@ -41,7 +42,17 @@
 
     </form>
     <div class="comments">
-    <p>댓글</p><hr />
+    <p>댓글</p>
+   <c:choose>
+    <c:when test="${getOneCommentCount eq  null}">
+       0
+    </c:when>
+    <c:otherwise>
+        ${getOneCommentCount}
+    </c:otherwise>
+</c:choose>
+  
+   <hr />
   		<table cellpadding="0" cellspacing="0">
 			<c:choose>
 	            <c:when test="${empty comment}">
@@ -52,7 +63,7 @@
 	            <c:otherwise>
 	            	<c:forEach items="${comment}" var="comment">
 	            		<tr>            			
-	            			<td>${comment.board_number_count}</td>
+	            			<td>${comment.comment_number_count}</td>
 	            			<td>${comment.comment_user_id}</td>
 	            			<td id="commentText_${comment.comment_number}">${comment.comment_text}</td>
 	            			<td>

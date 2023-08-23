@@ -48,7 +48,8 @@
      
     </form>
     <div class="comments">
-    <p>댓글</p><hr />
+    <p>댓글</p>${getOneCommentCount}
+    <hr />
   		<table cellpadding="0" cellspacing="0">
 			<c:choose>
 	            <c:when test="${empty comment}">
@@ -59,17 +60,14 @@
 	            <c:otherwise>
 	            	<c:forEach items="${comment}" var="comment">
 	            		<tr>            			
-	            			<td>${comment.board_number_count}</td>
+	            			<td>${comment.comment_number_count}</td>
 	            			<td>${comment.comment_user_id}</td>
 	            			<td id="commentText_${comment.comment_number}">${comment.comment_text}</td>
 	            			<td>
 	            				<fmt:formatDate value="${comment.comment_create_date}" pattern="MM월 dd일 a HH시 mm분" />
 	            				<c:if test="${comment.comment_update_count == 1}">(수정됨)</c:if>
    							</td>
-	            				<c:if test="${comment.comment_user_id eq user.id}">
-	            					<td><button id="commentUpdate_${comment.comment_number}" onclick="updateComment(${comment.comment_number})">수정하기</button></td>
-	            					<td><button id="commentDelete_${comment.comment_number}" onclick="deleteComment(${comment.comment_number})">삭제하기</button></td>
-	            				</c:if>
+	            		
 	            		</tr> 
 	            	</c:forEach>
 	            </c:otherwise>
@@ -77,7 +75,7 @@
 		</table>
 </div>
 
-
+<%-- 
 <div class="comment-form">
     <h2>댓글 작성</h2>
     <form action="createComment.do" method="get">
@@ -88,7 +86,7 @@
         </div>
         <button type="submit" id="addCommentButton">댓글 추가</button>
     </form>
-</div> 
+</div>  --%>
     
   </div>
   <jsp:include page="/module/footer.jsp"></jsp:include>

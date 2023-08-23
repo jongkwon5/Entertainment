@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.entertain.biz.board.BoardService;
 import com.entertain.biz.board.BoardVO;
 import com.entertain.biz.board.CommentVO;
+import com.entertain.biz.board.Criteria;
 
 
 @Service
@@ -24,8 +25,8 @@ public void createBoard(BoardVO vo) {
 }
 	
 	
-	public List<BoardVO> getBoardList(BoardVO vo) {
-		return boardDAO.getBoardList(vo);
+	public List<BoardVO> getBoardList(BoardVO vo, Criteria cri) {
+		return boardDAO.getBoardList(vo, cri);
 	}
 	
 	public List<BoardVO> getSearchList(BoardVO vo){
@@ -68,4 +69,18 @@ public void createBoard(BoardVO vo) {
 		boardDAO.deleteComment(number);
 	}
 	
+	public void setBoardViewCount(int number) {
+		boardDAO.setBoardViewCount(number);
+	}
+	
+	public Integer getOneCommentCount(int number) {
+		return boardDAO.getOneCommentCount(number);
+	}
+
+	@Override
+	public int getBoardCount(BoardVO vo) {
+		return boardDAO.getBoardCount(vo);
+	}
+	
 }
+	

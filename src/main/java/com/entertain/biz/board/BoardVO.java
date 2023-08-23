@@ -11,7 +11,14 @@ public class BoardVO {
 	private Timestamp board_create_date;
 	private String search_type;
 	private int comment_count;
+	private int board_view_count;
 	
+	public int getBoard_view_count() {
+		return board_view_count;
+	}
+	public void setBoard_view_count(int board_view_count) {
+		this.board_view_count = board_view_count;
+	}
 	public int getComment_count() {
 		return comment_count;
 	}

@@ -9,6 +9,7 @@
 		<result property="board_title" column="Board_Title"/>
 		<result property="board_text" column="Board_Text"/>
 		<result property="board_create_date" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp" column="Board_Create_Date"/>
+		<result property="board_view_count" column="Board_View_Count"/>
 		<!-- <result property="chat_create_date" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp" column="ChattingRoom_Create_Date"/> -->
 	</resultMap>
 	
@@ -22,23 +23,40 @@
 		<!-- <result property="chat_create_date" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp" column="ChattingRoom_Create_Date"/> -->
 	</resultMap>
 	
-	<select id="getBoardList" resultMap="enter_Board">
-	   SELECT e.*, 
-           (SELECT COUNT(*) FROM enter_comment c WHERE c.Board_Number = e.Board_Number) AS comment_count
-    FROM enter_Board e
-    ORDER BY e.Board_Number DESC;
+	 <select id="getBoardCount" resultType="int">
+		SELECT COUNT(*) FROM enter_board;
+	</select> 
+	
+	<select id="getBoardList" parameterType="HashMap" resultMap="enter_Board">
+	SELECT B.*, IFNULL(C.comment_count, 0) AS comment_count
+FROM enter_Board B
+LEFT JOIN (
+    SELECT board_number, COUNT(*) AS comment_count
+    FROM enter_comment
+    GROUP BY board_number
+) C ON B.Board_Number = C.board_number
+WHERE B.Board_Number > 0
+ORDER BY B.Board_Number DESC
+LIMIT #{criteria.amount} OFFSET #{criteria.startNum}
+	</select>
+
+
+	<select id="getOneCommentCount" resultType="Integer">
+	 SELECT COUNT(*) AS comment_count
+	FROM enter_comment WHERE Board_Number = #{board.number} GROUP BY Board_Number;
 	</select>
 	
-
 	<select id="getSearchList" resultMap="enter_Board">
-		SELECT * FROM enter_Board 
-		<if test="search_type=='title'">
-			WHERE Board_Title Like concat('%', #{board_text}, '%')
-		</if>
-		<if test="search_type=='writer'">
-			WHERE Board_User_Id Like concat('%', #{board_text}, '%')
-		</if>
-		ORDER BY Board_Number DESC;
+		 SELECT e.*, 
+           (SELECT COUNT(*) FROM enter_comment c WHERE c.Board_Number = e.Board_Number) AS comment_count
+    FROM enter_Board e
+    <if test="search_type=='title'">
+        WHERE e.Board_Title LIKE CONCAT('%', #{board_text}, '%')
+    </if>
+    <if test="search_type=='writer'">
+        WHERE e.Board_User_Id LIKE CONCAT('%', #{board_text}, '%')
+    </if>
+    ORDER BY e.Board_Number DESC;
 	</select>
 
 	<insert id="createBoard" useGeneratedKeys="true" parameterType="board">
@@ -57,12 +75,12 @@
             Comment_Text,
             Comment_Create_Date,
             Comment_Update_Count,
-            @row_number := @row_number + 1 AS Board_Number_Count
+            @row_number := @row_number + 1 AS Comment_Number_Count
         FROM 
             (SELECT * FROM enter_comment WHERE Board_Number = #{board_number} ORDER BY Comment_Create_Date ASC) AS ordered_comments,
             (SELECT @row_number := 0) AS t
         ORDER BY 
-            Board_Number_Count DESC;
+            Comment_Number_Count DESC;
 	</select>
 	
 	<insert id="createComment" useGeneratedKeys="true" parameterType="comment">
@@ -87,14 +105,9 @@
 		update enter_comment set Comment_Text = #{comment_text}, Comment_Create_Date = now(), comment_update_count = '1' WHERE Comment_Number = #{comment_number} and Board_Number = #{board_number};
 	</update>
 	
-	
-	
-<!-- 	<select id="commentCount" resultType="int">
-	SELECT Board_Number,COUNT(*) + 1 AS Comment_Count
-FROM enter_comment
-WHERE Board_Number = #{board.number}
-GROUP BY Board_Number;
-	</select> -->
+	<update id="setBoardViewCount">
+		update enter_Board set Board_View_Count = Board_View_Count + 1 where Board_Number = #{board_number};
+	</update>
 	
 	</mapper>
 	<!-- 상세검색 -->

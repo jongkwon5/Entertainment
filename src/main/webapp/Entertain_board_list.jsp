@@ -12,6 +12,21 @@
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <link rel="stylesheet" type="text/css" href="${context}/resources/css/stylesheet_board_list.css" />
 </head>
+<style>
+		ul {
+			list-style: none;
+			width : 30%;
+			display: inline-block;
+		}
+		
+		li {
+			float: left;
+			margin-left : 5px;
+		}
+	</style>
+
+
+
 <body>
 <% String id =(String)session.getAttribute("AA");
 String chk = (String)request.getAttribute("UPDATE_RESULT");%>
@@ -23,6 +38,7 @@ String chk = (String)request.getAttribute("UPDATE_RESULT");%>
 		<div id="main">
 			 <div class="board">
         <h1>게시판 목록</h1>
+        <p style="color:black">전체 게시글 수 : ${aaa}</p>
         <div class="search-bar">
         	<select name="searchType" id="searchType">
         		<option value="title">제목</option>
@@ -34,10 +50,11 @@ String chk = (String)request.getAttribute("UPDATE_RESULT");%>
         </div>
         <table class="post-table">
             <tr>
-                <th style="width:10%">번호</th>
-                <th style="width:30%">작성자</th>
-                <th style="width:40%">제목</th>
-                <th style="width:20%">생성일자</th>
+                <th style="width:5%">번호</th>
+                <th style="width:10%">작성자</th>
+                <th style="width:30%">제목</th>
+                <th style="width:15%">생성일자</th>
+                <th style="width:5%">조회수</th>
             </tr>
             <c:choose>
         <c:when test="${empty boardList}">
@@ -46,26 +63,60 @@ String chk = (String)request.getAttribute("UPDATE_RESULT");%>
             </tr>
         </c:when>
         <c:otherwise>
-            <c:forEach items="${boardList}" var="board">
+            <c:forEach items="${boardList}" var="board" varStatus="commentCount">
                 <tr class="boardList" onclick="window.location.href='getOneBoard.do?board_number=${board.board_number}'" style="cursor: pointer;">
                     <td>${board.board_number}</td>
                     <td>${board.board_user_id}</td>
                     <td>${board.board_title}[${board.comment_count}]</td>
                     <td><fmt:formatDate value="${board.board_create_date}" pattern="YY년 MM월 dd일 a HH시 mm분" /></td>
+                	<td>${board.board_view_count}</td>
                 </tr>
             </c:forEach>
         </c:otherwise>
     </c:choose>
         </table>
+        <form action="Entertain_board_list.do" method="get" id="listForm">
+		<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum }">
+		<input type="hidden" name="amount" value="${pageMaker.cri.amount }">		
+		</form>
         <button id="writeButton" type="button" onclick="location.href='boardWrite.do'">게시글 쓰기</button>
     </div>
-       	
+    <div>
+			<ul class="pagination">
+				<c:if test="${pageMaker.prev }">
+					<li class="pagination_button">
+						<a href="${pageMaker.startPage - 1 }">Previous</a>
+					</li>
+				</c:if>
+				
+				<c:forEach var="num" begin="${pageMaker.startPage }" end="${pageMaker.endPage }">
+					<li class="pagination_button">
+						<a href="${num }">${num }</a>
+					</li>
+				</c:forEach>
+				
+				<c:if test="${pageMaker.next }">
+					<li class="pagination_button">
+						<a href="${pageMaker.endPage + 1 }">Next</a>
+					</li>
+				</c:if>
+			</ul>
+		</div>
 		</div>
 		</div>
 <jsp:include page="/module/footer.jsp"></jsp:include>
 
 <script>
-
+$(document).ready(function() {
+	var listForm = $("#listForm");
+	
+	$(".pagination_button a").on("click", function(e) {
+		e.preventDefault();
+		
+		listForm.find("input[name='pageNum']").val($(this).attr("href"));
+		listForm.submit();
+	});
+});
 
 
 $(document).on('click', '#searchButton', function(e){

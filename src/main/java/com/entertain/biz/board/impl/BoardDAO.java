@@ -2,6 +2,7 @@ package com.entertain.biz.board.impl;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.entertain.biz.board.BoardVO;
 import com.entertain.biz.board.CommentVO;
+import com.entertain.biz.board.Criteria;
 
 @Repository
 public class BoardDAO {
@@ -16,8 +18,12 @@ public class BoardDAO {
 	@Autowired
 	SqlSessionTemplate mybatis;
 	
-	public List<BoardVO> getBoardList(BoardVO vo) {
-		return mybatis.selectList("BoardDAO.getBoardList", vo);
+	public List<BoardVO> getBoardList(BoardVO vo, Criteria cri) {
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("board", vo);
+		cri.setStartNum((cri.getPageNum() - 1) * cri.getAmount());
+		paramMap.put("criteria", cri);
+		return mybatis.selectList("BoardDAO.getBoardList", paramMap);
 	}
 	
 	public List<BoardVO> getSearchList(BoardVO vo){
@@ -56,5 +62,18 @@ public class BoardDAO {
 	public void deleteComment(int number) {
 		mybatis.delete("BoardDAO.deleteComment", number);
 	}
+	
+	public void setBoardViewCount(int number) {
+		mybatis.update("BoardDAO.setBoardViewCount", number);
+	}
+	
+	public Integer getOneCommentCount(int number) {
+		return mybatis.selectOne("BoardDAO.getOneCommentCount", number);
+	}
+	
+	public int getBoardCount(BoardVO vo) {
+		return mybatis.selectOne("BoardDAO.getBoardCount", vo);
+	}
+	
 	
 }

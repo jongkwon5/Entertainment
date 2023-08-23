@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface BoardService {
 
-	 List<BoardVO> getBoardList(BoardVO vo);
+	 List<BoardVO> getBoardList(BoardVO vo, Criteria cri);
 
 	 List<BoardVO> getSearchList(BoardVO vo);
 	 
@@ -23,4 +23,13 @@ public interface BoardService {
 	 void updateComment(CommentVO vo);
 	 
 	 void deleteComment(int number);
+	 
+	 void setBoardViewCount(int number);
+	 
+	 Integer getOneCommentCount(int number);
+	 
+	int getBoardCount(BoardVO vo);
+	
+	 
+	 
 }
