@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:set var="context" value="${pageContext.request.contextPath}"/>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,7 +11,22 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <script src="https://kit.fontawesome.com/cd8f90f87a.js" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-<link rel="stylesheet" type="text/css" href="${context}/resources/css/stylesheet_board_list.css" />
+
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="${context}/resources/css/style2.css">
+
+    <link rel="stylesheet" href="${context}/resources/css/owl.carousel.min.css">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="${context}/resources/css/bootstrap.min.css">
+    
+    <!-- Style -->
+    <link rel="stylesheet" href="${context}/resources/css/style.css">
+
+
+
+
 </head>
 <style>
 		ul {
@@ -31,14 +47,23 @@
 <% String id =(String)session.getAttribute("AA");
 String chk = (String)request.getAttribute("UPDATE_RESULT");%>
 
+<%
+String extractedPart = request.getParameter("extractedPart");
+System.out.println(extractedPart);
+if (extractedPart == null) {
+    extractedPart = ""; // 값이 없을 경우 빈 문자열로 초기화
+}
+%>
+
 <jsp:include page="/module/header.jsp"></jsp:include>
 	<div class="container">
 		
       <!--**************************** 메인 ****************************-->
 		<div id="main">
 			 <div class="board">
-        <h1>게시판 목록</h1>
-        <p style="color:black">전체 게시글 수 : ${aaa}</p>
+        <h1>게시판 목록  </h1>
+        <p style="color:black">전체 게시글 수 </p>
+        <p style="color:black">${extractedPart}</p>
         <div class="search-bar">
         	<select name="searchType" id="searchType">
         		<option value="title">제목</option>
@@ -48,76 +73,89 @@ String chk = (String)request.getAttribute("UPDATE_RESULT");%>
             <button type="button" id="searchButton">검색</button>
             <button type="button" id="allListButton" onclick="location.href='Entertain_board_list.do'">전체글</button>
         </div>
-        <table class="post-table">
+        <table class="table table-striped custom-table">
+           <thead>
             <tr>
-                <th style="width:5%">번호</th>
-                <th style="width:10%">작성자</th>
-                <th style="width:30%">제목</th>
-                <th style="width:15%">생성일자</th>
-                <th style="width:5%">조회수</th>
+                <th scope="col">번호</th>
+                <th scope="col">작성자</th>
+                <th scope="col">제목</th>
+                <th scope="col">생성일자</th>
+                <th scope="col">조회수</th>
+                
             </tr>
-            <c:choose>
-        <c:when test="${empty boardList}">
-            <tr>
-                <td colspan="5">검색 결과가 없습니다</td>
-            </tr>
-        </c:when>
-        <c:otherwise>
-            <c:forEach items="${boardList}" var="board" varStatus="commentCount">
-                <tr class="boardList" onclick="window.location.href='getOneBoard.do?board_number=${board.board_number}'" style="cursor: pointer;">
-                    <td>${board.board_number}</td>
-                    <td>${board.board_user_id}</td>
-                    <td>${board.board_title}[${board.comment_count}]</td>
-                    <td><fmt:formatDate value="${board.board_create_date}" pattern="YY년 MM월 dd일 a HH시 mm분" /></td>
-                	<td>${board.board_view_count}</td>
+      </thead>
+   <tbody>
+            <c:forEach items="${boardList}" var="board">
+        
+            	<c:choose>
+            	<c:when test="${total == 0}">
+           		 <tr>
+                	<td colspan="5">검색 결과가 없습니다</td>
+           		 </tr>
+        		</c:when>
+            	<c:otherwise>
+                <tr scope="row" class="boardList" onclick="window.location.href='getOneBoard.do?board_number=${board.Board_Number}'" style="cursor: pointer;">
+                  	<td>${board.Board_Number}</td>
+                    <td>${board.Board_User_Id}</td>
+                    <td>${board.Board_Title}[${board.comment_count}]</td>
+                    <td><fmt:formatDate value="${board.Board_Create_Date}" pattern="YY년 MM월 dd일 a HH시 mm분" /></td>
+                	<td>${board.Board_View_Count}</td>
                 </tr>
+                </c:otherwise>
+                </c:choose>
             </c:forEach>
-        </c:otherwise>
-    </c:choose>
+  
+</tbody>
         </table>
-        <form action="Entertain_board_list.do" method="get" id="listForm">
-		<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum }">
-		<input type="hidden" name="amount" value="${pageMaker.cri.amount }">		
+        <form action="Entertain_board_list.do" method="get" id="listForm">		
 		</form>
         <button id="writeButton" type="button" onclick="location.href='boardWrite.do'">게시글 쓰기</button>
     </div>
-    <div>
-			<ul class="pagination">
-				<c:if test="${pageMaker.prev }">
-					<li class="pagination_button">
-						<a href="${pageMaker.startPage - 1 }">Previous</a>
-					</li>
-				</c:if>
-				
-				<c:forEach var="num" begin="${pageMaker.startPage }" end="${pageMaker.endPage }">
-					<li class="pagination_button">
-						<a href="${num }">${num }</a>
-					</li>
-				</c:forEach>
-				
-				<c:if test="${pageMaker.next }">
-					<li class="pagination_button">
-						<a href="${pageMaker.endPage + 1 }">Next</a>
-					</li>
-				</c:if>
-			</ul>
-		</div>
-		</div>
+<div>
+    <ul class="btn-group pagination">
+        <c:if test="${pageMaker.prev }">
+            <li>
+                <c:url value="/Entertain_board_list.do" var="prevUrl">
+                    <c:param name="page" value="${pageMaker.startPage-1}"/>
+                    <c:param name="searchType" value="${param.searchType}"/>
+                    <c:param name="searchInput" value="${param.searchInput}"/>
+                </c:url>
+                <a href="${prevUrl}"><i class="fa fa-chevron-left"></i></a>
+            </li>
+        </c:if>
+        
+        <c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage }" var="pageNum">
+            <li>
+                <c:url value="/Entertain_board_list.do" var="pageUrl">
+                    <c:param name="page" value="${pageNum}"/>
+                    <c:param name="searchType" value="${param.searchType}"/>
+                    <c:param name="searchInput" value="${param.searchInput}"/>
+                </c:url>
+                <a href="${pageUrl}"><i class="fa">${pageNum}</i></a>
+            </li>
+        </c:forEach>
+        
+        <c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+            <li>
+                <c:url value="/Entertain_board_list.do" var="nextUrl">
+                    <c:param name="page" value="${pageMaker.endPage+1}"/>
+                    <c:param name="searchType" value="${param.searchType}"/>
+                    <c:param name="searchInput" value="${param.searchInput}"/>
+                </c:url>
+                <a href="${nextUrl}"><i class="fa fa-chevron-right"></i></a>
+            </li>
+        </c:if>
+    </ul>
+</div>
+	</div>
 		</div>
 <jsp:include page="/module/footer.jsp"></jsp:include>
 
 <script>
-$(document).ready(function() {
-	var listForm = $("#listForm");
-	
-	$(".pagination_button a").on("click", function(e) {
-		e.preventDefault();
-		
-		listForm.find("input[name='pageNum']").val($(this).attr("href"));
-		listForm.submit();
-	});
-});
 
+var currentURL = window.location.href;
+var baseURL = currentURL.split('?')[0];
+var extractedPart = baseURL.substring(baseURL.lastIndexOf('/') + 1);
 
 $(document).on('click', '#searchButton', function(e){
 	e.preventDefault();
@@ -127,7 +165,7 @@ $(document).on('click', '#searchButton', function(e){
 		alert("내용을 입력해주세요");
 		return;
 	}
-	var url = "getBoardSearch.do";
+	var url = "Entertain_board_list.do";
 	url += "?searchType=" + searchType
 	url += "&searchInput=" + searchInput
 	location.href = url;

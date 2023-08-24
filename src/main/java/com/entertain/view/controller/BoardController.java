@@ -1,6 +1,7 @@
 package com.entertain.view.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.PostConstruct;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.entertain.biz.board.BoardVO;
@@ -29,28 +31,61 @@ public class BoardController {
 	private BoardServiceImpl boardService;
 
 	@RequestMapping(value = "/Entertain_board_list.do", method = RequestMethod.GET)
-	public String getBoardList(Model model, BoardVO vo, Criteria cri) {
+	public ModelAndView getBoardList(BoardVO vo, Model model, Criteria cri, HttpServletRequest request) {
+		String searchType = request.getParameter("searchType");
+			String searchInput =request.getParameter("searchInput");
 		
-		System.out.println(boardService.getBoardCount(vo));
-		int total = boardService.getBoardCount(vo);
+		ModelAndView mav = new ModelAndView("/Entertain_board_list.jsp");
+		if(searchType == null && searchInput == null) {
+			 PageVO pageVO = new PageVO();
+			 pageVO.setCri(cri);
+			 pageVO.setTotalCount(boardService.getBoardCount());
+			 model.addAttribute("total",boardService.getBoardCount());
+			 List<Map<String,Object>> list = boardService.getBoardList(cri);
+			mav.addObject("boardList", list);
+			mav.addObject("pageMaker", pageVO);
+		}else {
+			
+				cri.setSearch_type(searchType);
+				cri.setBoard_text(searchInput);
+				int total = boardService.getSearchBoardCount(cri);
+				System.out.println(boardService.getSearchBoardCount(cri));
+				 PageVO pageVO = new PageVO();
+				 pageVO.setCri(cri);
+				 pageVO.setTotalCount(total);
+				 model.addAttribute("total",total);
+				 List<Map<String,Object>> list = boardService.getSearchList(cri);
+				 System.out.println("안녕하세요ㅁㅁㅁㅁ");
+				 mav.addObject("boardList", list);
+				 mav.addObject("pageMaker", pageVO);
+				System.out.println("후");
+		}
 		
-		model.addAttribute("boardList", boardService.getBoardList(vo, cri));
-		model.addAttribute("pageMaker", new PageVO(cri, total));
-		return "Entertain_board_list.jsp";
+		return mav;
 	}
 
-	@RequestMapping(value = "/getBoardSearch.do", method = RequestMethod.GET)
-	public String getSearchList(Model model, BoardVO vo, @RequestParam("searchType") String searchType,
-			@RequestParam("searchInput") String searchInput) {
-		System.out.println("전");
-
-		vo.setSearch_type(searchType);
-		vo.setBoard_text(searchInput);
-
-		model.addAttribute("boardList", boardService.getSearchList(vo));
-		System.out.println("후");
-		return "Entertain_board_list.jsp";
-	}
+//	@RequestMapping(value = "/getBoardSearch.do", method = RequestMethod.GET)
+//	public ModelAndView getSearchList(Model model, BoardVO vo, @RequestParam("searchType") String searchType,
+//			@RequestParam("searchInput") String searchInput, Criteria cri) {
+//		ModelAndView mav = new ModelAndView("/Entertain_board_list.jsp?a");
+//		cri.setSearch_type(searchType);
+//		cri.setBoard_text(searchInput);
+//
+//		int total = boardService.getSearchBoardCount(cri);
+//		System.out.println(boardService.getSearchBoardCount(cri));
+//		 PageVO pageVO = new PageVO();
+//		 pageVO.setCri(cri);
+//		 pageVO.setTotalCount(total);
+//		 model.addAttribute("total",total);
+//		 
+//		 List<Map<String,Object>> list = boardService.getSearchList(cri);
+//		 System.out.println("안녕하세요ㅁㅁㅁㅁ");
+//		 mav.addObject("boardList", list);
+//		 mav.addObject("pageMaker", pageVO);
+//
+//		System.out.println("후");
+//		return mav;
+//	}
 
 	@RequestMapping(value = "/boardWrite.do", method = RequestMethod.GET)
 	public String getboardWrite() {

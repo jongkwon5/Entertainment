@@ -18,16 +18,14 @@ public class BoardDAO {
 	@Autowired
 	SqlSessionTemplate mybatis;
 	
-	public List<BoardVO> getBoardList(BoardVO vo, Criteria cri) {
-		Map<String, Object> paramMap = new HashMap<String, Object>();
-		paramMap.put("board", vo);
-		cri.setStartNum((cri.getPageNum() - 1) * cri.getAmount());
-		paramMap.put("criteria", cri);
-		return mybatis.selectList("BoardDAO.getBoardList", paramMap);
+	public List<Map<String, Object>> getBoardList(Criteria cri) {
+
+		return mybatis.selectList("BoardDAO.getBoardList", cri);
 	}
 	
-	public List<BoardVO> getSearchList(BoardVO vo){
-		return mybatis.selectList("BoardDAO.getSearchList", vo);
+	public List<Map<String, Object>> getSearchList(Criteria cri){
+
+		return mybatis.selectList("BoardDAO.getSearchList", cri);
 	}
 	
 	public void createBoard(BoardVO vo) {
@@ -71,9 +69,11 @@ public class BoardDAO {
 		return mybatis.selectOne("BoardDAO.getOneCommentCount", number);
 	}
 	
-	public int getBoardCount(BoardVO vo) {
-		return mybatis.selectOne("BoardDAO.getBoardCount", vo);
+	public int getBoardCount() {
+		return mybatis.selectOne("BoardDAO.getBoardCount");
 	}
 	
-	
+	public int getSearchBoardCount(Criteria cri) {
+		return mybatis.selectOne("BoardDAO.getSearchBoardCount", cri);
+	}
 }

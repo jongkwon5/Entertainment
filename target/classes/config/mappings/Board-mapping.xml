@@ -27,17 +27,45 @@
 		SELECT COUNT(*) FROM enter_board;
 	</select> 
 	
-	<select id="getBoardList" parameterType="HashMap" resultMap="enter_Board">
-	SELECT B.*, IFNULL(C.comment_count, 0) AS comment_count
-FROM enter_Board B
-LEFT JOIN (
-    SELECT board_number, COUNT(*) AS comment_count
-    FROM enter_comment
-    GROUP BY board_number
-) C ON B.Board_Number = C.board_number
-WHERE B.Board_Number > 0
-ORDER BY B.Board_Number DESC
-LIMIT #{criteria.amount} OFFSET #{criteria.startNum}
+	<select id="getSearchBoardCount" resultType="int">
+	SELECT COUNT(*) FROM enter_Board e
+<if test="search_type=='title'">
+    WHERE e.Board_Title LIKE CONCAT('%', #{board_text}, '%')
+</if>
+<if test="search_type=='writer'">
+    WHERE e.Board_User_Id LIKE CONCAT('%', #{board_text}, '%')
+</if>
+	</select>
+	
+	<select id="getSearchList" parameterType="hashmap" resultType="hashmap">
+	  
+  	SELECT e.*, 
+        (SELECT COUNT(*) FROM enter_comment c WHERE c.Board_Number = e.Board_Number) AS comment_count
+    FROM enter_board e
+<if test="search_type=='title'">
+    WHERE e.Board_Title LIKE CONCAT('%', #{board_text}, '%')
+</if>
+<if test="search_type=='writer'">
+    WHERE e.Board_User_Id LIKE CONCAT('%', #{board_text}, '%')
+</if>
+ ORDER BY e.Board_Number DESC
+    LIMIT #{pageStart}, #{perPageNum};
+   
+	</select>
+	
+	
+	
+	<select id="getBoardList" parameterType="hashmap" resultType="hashmap">
+  <![CDATA[
+    SELECT
+        eb.*,
+        (SELECT COUNT(*) FROM enter_comment ec WHERE ec.Board_Number = eb.Board_Number) AS comment_count
+    FROM
+        enter_board eb
+    ORDER BY
+        eb.Board_Number DESC
+    LIMIT #{pageStart}, #{perPageNum}
+    ]]>
 	</select>
 
 
@@ -46,18 +74,8 @@ LIMIT #{criteria.amount} OFFSET #{criteria.startNum}
 	FROM enter_comment WHERE Board_Number = #{board.number} GROUP BY Board_Number;
 	</select>
 	
-	<select id="getSearchList" resultMap="enter_Board">
-		 SELECT e.*, 
-           (SELECT COUNT(*) FROM enter_comment c WHERE c.Board_Number = e.Board_Number) AS comment_count
-    FROM enter_Board e
-    <if test="search_type=='title'">
-        WHERE e.Board_Title LIKE CONCAT('%', #{board_text}, '%')
-    </if>
-    <if test="search_type=='writer'">
-        WHERE e.Board_User_Id LIKE CONCAT('%', #{board_text}, '%')
-    </if>
-    ORDER BY e.Board_Number DESC;
-	</select>
+	
+	
 
 	<insert id="createBoard" useGeneratedKeys="true" parameterType="board">
 		insert into enter_Board(Board_Number, Board_User_Id, Board_Title, Board_Text, Board_Create_Date)values(#{board_number},#{board_user_id},#{board_title},#{board_text},now());

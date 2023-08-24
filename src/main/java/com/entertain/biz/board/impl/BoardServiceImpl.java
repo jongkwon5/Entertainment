@@ -2,6 +2,7 @@ package com.entertain.biz.board.impl;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,13 +26,13 @@ public void createBoard(BoardVO vo) {
 }
 	
 	
-	public List<BoardVO> getBoardList(BoardVO vo, Criteria cri) {
-		return boardDAO.getBoardList(vo, cri);
+	public List<Map<String, Object>> getBoardList(Criteria cri) {
+		return boardDAO.getBoardList(cri);
 	}
 	
-	public List<BoardVO> getSearchList(BoardVO vo){
+	public List<Map<String, Object>> getSearchList(Criteria cri){
 
-		return boardDAO.getSearchList(vo);
+		return boardDAO.getSearchList(cri);
 		
 	}
 	
@@ -78,8 +79,12 @@ public void createBoard(BoardVO vo) {
 	}
 
 	@Override
-	public int getBoardCount(BoardVO vo) {
-		return boardDAO.getBoardCount(vo);
+	public int getBoardCount() {
+		return boardDAO.getBoardCount();
+	}
+	
+	public int getSearchBoardCount(Criteria cri) {
+		return boardDAO.getSearchBoardCount(cri);
 	}
 	
 }

@@ -1,12 +1,13 @@
 package com.entertain.biz.board;
 
 import java.util.List;
+import java.util.Map;
 
 public interface BoardService {
 
-	 List<BoardVO> getBoardList(BoardVO vo, Criteria cri);
+	List<Map<String, Object>> getBoardList(Criteria cri);
 
-	 List<BoardVO> getSearchList(BoardVO vo);
+	List<Map<String, Object>> getSearchList(Criteria cri);
 	 
 	 void createBoard(BoardVO vo);
 	 
@@ -28,8 +29,9 @@ public interface BoardService {
 	 
 	 Integer getOneCommentCount(int number);
 	 
-	int getBoardCount(BoardVO vo);
+	int getBoardCount();
 	
+	int getSearchBoardCount(Criteria cri);
 	 
 	 
 }
