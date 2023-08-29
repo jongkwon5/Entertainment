@@ -49,7 +49,7 @@ public class BoardController {
 				cri.setSearch_type(searchType);
 				cri.setBoard_text(searchInput);
 				int total = boardService.getSearchBoardCount(cri);
-				System.out.println(boardService.getSearchBoardCount(cri));
+				System.out.println("값"+total);
 				 PageVO pageVO = new PageVO();
 				 pageVO.setCri(cri);
 				 pageVO.setTotalCount(total);
@@ -64,28 +64,26 @@ public class BoardController {
 		return mav;
 	}
 
-//	@RequestMapping(value = "/getBoardSearch.do", method = RequestMethod.GET)
-//	public ModelAndView getSearchList(Model model, BoardVO vo, @RequestParam("searchType") String searchType,
-//			@RequestParam("searchInput") String searchInput, Criteria cri) {
-//		ModelAndView mav = new ModelAndView("/Entertain_board_list.jsp?a");
-//		cri.setSearch_type(searchType);
-//		cri.setBoard_text(searchInput);
-//
-//		int total = boardService.getSearchBoardCount(cri);
-//		System.out.println(boardService.getSearchBoardCount(cri));
-//		 PageVO pageVO = new PageVO();
-//		 pageVO.setCri(cri);
-//		 pageVO.setTotalCount(total);
-//		 model.addAttribute("total",total);
-//		 
-//		 List<Map<String,Object>> list = boardService.getSearchList(cri);
-//		 System.out.println("안녕하세요ㅁㅁㅁㅁ");
-//		 mav.addObject("boardList", list);
-//		 mav.addObject("pageMaker", pageVO);
-//
-//		System.out.println("후");
-//		return mav;
-//	}
+	/*
+	 * @eRequestMapping(value = "/getBoardSearch.do", method = RequestMethod.GET)
+	 * public ModelAndView getSearchList(Model model, BoardVO
+	 * vo, @RequestParam("searchType") String searchType,
+	 * 
+	 * @RequstParam("searchInput") String searchInput, Criteria cri) { ModelAndView
+	 * mav = new ModelAndView("/Entertain_board_list.jsp");
+	 * cri.setSearch_type(searchType); cri.setBoard_text(searchInput);
+	 * 
+	 * int total = boardService.getSearchBoardCount(cri);
+	 * System.out.println("값"+boardService.getSearchBoardCount(cri)); PageVO pageVO
+	 * = new PageVO(); pageVO.setCri(cri); pageVO.setTotalCount(total);
+	 * model.addAttribute("total",total);
+	 * 
+	 * List<Map<String,Object>> list = boardService.getSearchList(cri);
+	 * System.out.println("안녕하세요ㅁㅁㅁㅁ"); mav.addObject("boardList", list);
+	 * mav.addObject("pageMaker", pageVO);
+	 * 
+	 * System.out.println("후"); return mav; }
+	 */
 
 	@RequestMapping(value = "/boardWrite.do", method = RequestMethod.GET)
 	public String getboardWrite() {

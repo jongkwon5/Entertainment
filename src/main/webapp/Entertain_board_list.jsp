@@ -13,14 +13,10 @@
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
-
     <link rel="stylesheet" href="${context}/resources/css/style2.css">
-
     <link rel="stylesheet" href="${context}/resources/css/owl.carousel.min.css">
-
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="${context}/resources/css/bootstrap.min.css">
-    
     <!-- Style -->
     <link rel="stylesheet" href="${context}/resources/css/style.css">
 
@@ -31,14 +27,17 @@
 <style>
 		ul {
 			list-style: none;
-			width : 30%;
+	
 			display: inline-block;
 		}
 		
 		li {
 			float: left;
 			margin-left : 5px;
+			align-self: center;
 		}
+		
+		
 	</style>
 
 
@@ -60,58 +59,74 @@ if (extractedPart == null) {
 		
       <!--**************************** 메인 ****************************-->
 		<div id="main">
-			 <div class="board">
-        <h1>게시판 목록  </h1>
-        <p style="color:black">전체 게시글 수 </p>
-        <p style="color:black">${extractedPart}</p>
+			 <div class="board" style="min-height: 100%;">
+        <h1 style="padding-top:20px; text-align: center;">BOARD</h1>
+
         <div class="search-bar">
         	<select name="searchType" id="searchType">
         		<option value="title">제목</option>
         		<option value="writer">작성자</option>
         	</select>
             <input type="text" id="searchInput" placeholder="검색어를 입력하세요...">
-            <button type="button" id="searchButton">검색</button>
-            <button type="button" id="allListButton" onclick="location.href='Entertain_board_list.do'">전체글</button>
+            <button type="button" id="searchButton"><i class="fa-solid fa-magnifying-glass"></i></button>
+        
         </div>
         <table class="table table-striped custom-table">
            <thead>
             <tr>
-                <th scope="col">번호</th>
-                <th scope="col">작성자</th>
-                <th scope="col">제목</th>
-                <th scope="col">생성일자</th>
-                <th scope="col">조회수</th>
+                <th scope="col" style="width:7%;">번호</th>
+                <th scope="col" style="width:15%;">작성자</th>
+                <th scope="col" style="width:25%;">제목</th>
+                <th scope="col" style="width:15%;">생성일자</th>
+                <th scope="col" style="width:5%;">조회수</th>
                 
             </tr>
       </thead>
    <tbody>
-            <c:forEach items="${boardList}" var="board">
-        
+
             	<c:choose>
             	<c:when test="${total == 0}">
-           		 <tr>
-                	<td colspan="5">검색 결과가 없습니다</td>
-           		 </tr>
+           		<tr style="background-color: rgba(0, 0, 0, 0.0);">
+            <td style="text-align: center;" colspan="6">
+                <div style="display: table; width: 100%; height: 67vh;">
+                    <div style="display: table-cell; vertical-align: middle; text-align: center;">
+                   <p style="font-size:40px; maring:0px; font-weight: bold;"> 게시글이 없습니다.</p>
+                    </div>
+                </div>
+            </td>
+        </tr>
+
         		</c:when>
             	<c:otherwise>
-                <tr scope="row" class="boardList" onclick="window.location.href='getOneBoard.do?board_number=${board.Board_Number}'" style="cursor: pointer;">
-                  	<td>${board.Board_Number}</td>
-                    <td>${board.Board_User_Id}</td>
-                    <td>${board.Board_Title}[${board.comment_count}]</td>
-                    <td><fmt:formatDate value="${board.Board_Create_Date}" pattern="YY년 MM월 dd일 a HH시 mm분" /></td>
-                	<td>${board.Board_View_Count}</td>
-                </tr>
+            	   <c:forEach items="${boardList}" var="board" varStatus="loop">
+            <tr scope="row" class="boardList" onclick="window.location.href='getOneBoard.do?board_number=${board.Board_Number}'" style="cursor: pointer;">
+                <td>${board.Board_Number}</td>
+                <td>${board.Board_User_Id}</td>
+                <td>${board.Board_Title}[${board.comment_count}]</td>
+                <td><fmt:formatDate value="${board.Board_Create_Date}" pattern="YY년 MM월 dd일 a HH시 mm분" /></td>
+                <td>${board.Board_View_Count}</td>
+            </tr>
+            <c:if test="${loop.index + 1 == boardList.size() && loop.index < 9}">
+                <c:forEach begin="${loop.index + 1}" end="9">
+                    <tr>
+                        <td colspan="6">&nbsp;</td>
+                    </tr>
+                </c:forEach>
+            </c:if>
+        </c:forEach>
                 </c:otherwise>
+
                 </c:choose>
-            </c:forEach>
+      
   
 </tbody>
         </table>
         <form action="Entertain_board_list.do" method="get" id="listForm">		
-		</form>
-        <button id="writeButton" type="button" onclick="location.href='boardWrite.do'">게시글 쓰기</button>
-    </div>
-<div>
+		</form>   
+		
+		  <div id="bottomButton">
+        <button type="button" id="allListButton" onclick="location.href='Entertain_board_list.do'">전체글</button>
+        <div id="navi">
     <ul class="btn-group pagination">
         <c:if test="${pageMaker.prev }">
             <li>
@@ -120,7 +135,7 @@ if (extractedPart == null) {
                     <c:param name="searchType" value="${param.searchType}"/>
                     <c:param name="searchInput" value="${param.searchInput}"/>
                 </c:url>
-                <a href="${prevUrl}"><i class="fa fa-chevron-left"></i></a>
+                <a href="${prevUrl}"><i class="fa-solid fa-circle-chevron-left fa-lg"></i></a>
             </li>
         </c:if>
         
@@ -131,7 +146,7 @@ if (extractedPart == null) {
                     <c:param name="searchType" value="${param.searchType}"/>
                     <c:param name="searchInput" value="${param.searchInput}"/>
                 </c:url>
-                <a href="${pageUrl}"><i class="fa">${pageNum}</i></a>
+                <a href="${pageUrl}"><p class="pageNum">${pageNum}</p></a>
             </li>
         </c:forEach>
         
@@ -142,20 +157,22 @@ if (extractedPart == null) {
                     <c:param name="searchType" value="${param.searchType}"/>
                     <c:param name="searchInput" value="${param.searchInput}"/>
                 </c:url>
-                <a href="${nextUrl}"><i class="fa fa-chevron-right"></i></a>
+                <a href="${nextUrl}"><i class="fa-solid fa-circle-chevron-right fa-lg"></i></a>
             </li>
         </c:if>
     </ul>
 </div>
+      <button id="writeButton" type="button" onclick="location.href='boardWrite.do'">게시글 쓰기</button>
+    
+    </div>  
+    </div>
+  
+
 	</div>
 		</div>
 <jsp:include page="/module/footer.jsp"></jsp:include>
 
 <script>
-
-var currentURL = window.location.href;
-var baseURL = currentURL.split('?')[0];
-var extractedPart = baseURL.substring(baseURL.lastIndexOf('/') + 1);
 
 $(document).on('click', '#searchButton', function(e){
 	e.preventDefault();
