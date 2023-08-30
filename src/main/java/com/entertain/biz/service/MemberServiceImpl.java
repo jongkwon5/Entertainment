@@ -9,12 +9,12 @@ public class MemberServiceImpl {
 	@Autowired
 	MemberDAO memberDAO;
 	
-	public MemberVO getMember(MemberVO vo) {
-		return memberDAO.getMember(vo);
+	public MemberDTO getMember(MemberDTO dto) {
+		return memberDAO.getMember(dto);
 				
 	}
 	
-	public void insertMember(MemberVO vo) {
-		memberDAO.insertMember(vo);
+	public void insertMember(MemberDTO dto) {
+		memberDAO.insertMember(dto);
 	}
 }

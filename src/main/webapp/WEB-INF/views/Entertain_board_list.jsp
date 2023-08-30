@@ -99,7 +99,7 @@ if (extractedPart == null) {
         		</c:when>
             	<c:otherwise>
             	   <c:forEach items="${boardList}" var="board" varStatus="loop">
-            <tr scope="row" class="boardList" onclick="window.location.href='getOneBoard.do?board_number=${board.Board_Number}'" style="cursor: pointer;">
+            <tr scope="row" class="boardList" onclick="window.location.href='getOneBoard?board_number=${board.Board_Number}'" style="cursor: pointer;">
                 <td>${board.Board_Number}</td>
                 <td>${board.Board_User_Id}</td>
                 <td>${board.Board_Title}[${board.comment_count}]</td>
@@ -121,16 +121,16 @@ if (extractedPart == null) {
   
 </tbody>
         </table>
-        <form action="Entertain_board_list.do" method="get" id="listForm">		
+        <form action="Entertain_board_list" method="get" id="listForm">		
 		</form>   
 		
 		  <div id="bottomButton">
-        <button type="button" id="allListButton" onclick="location.href='Entertain_board_list.do'">전체글</button>
+        <button type="button" id="allListButton" onclick="location.href='Entertain_board_list'">전체글</button>
         <div id="navi">
     <ul class="btn-group pagination">
         <c:if test="${pageMaker.prev }">
             <li>
-                <c:url value="/Entertain_board_list.do" var="prevUrl">
+                <c:url value="/Entertain_board_list" var="prevUrl">
                     <c:param name="page" value="${pageMaker.startPage-1}"/>
                     <c:param name="searchType" value="${param.searchType}"/>
                     <c:param name="searchInput" value="${param.searchInput}"/>
@@ -141,7 +141,7 @@ if (extractedPart == null) {
         
         <c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage }" var="pageNum">
             <li>
-                <c:url value="/Entertain_board_list.do" var="pageUrl">
+                <c:url value="/Entertain_board_list" var="pageUrl">
                     <c:param name="page" value="${pageNum}"/>
                     <c:param name="searchType" value="${param.searchType}"/>
                     <c:param name="searchInput" value="${param.searchInput}"/>
@@ -152,7 +152,7 @@ if (extractedPart == null) {
         
         <c:if test="${pageMaker.next && pageMaker.endPage > 0}">
             <li>
-                <c:url value="/Entertain_board_list.do" var="nextUrl">
+                <c:url value="/Entertain_board_list" var="nextUrl">
                     <c:param name="page" value="${pageMaker.endPage+1}"/>
                     <c:param name="searchType" value="${param.searchType}"/>
                     <c:param name="searchInput" value="${param.searchInput}"/>
@@ -162,7 +162,7 @@ if (extractedPart == null) {
         </c:if>
     </ul>
 </div>
-      <button id="writeButton" type="button" onclick="location.href='boardWrite.do'">게시글 쓰기</button>
+      <button id="writeButton" type="button" onclick="location.href='boardWrite'">게시글 쓰기</button>
     
     </div>  
     </div>
@@ -182,7 +182,7 @@ $(document).on('click', '#searchButton', function(e){
 		alert("내용을 입력해주세요");
 		return;
 	}
-	var url = "Entertain_board_list.do";
+	var url = "Entertain_board_list";
 	url += "?searchType=" + searchType
 	url += "&searchInput=" + searchInput
 	location.href = url;

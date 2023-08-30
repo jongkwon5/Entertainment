@@ -8,9 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.entertain.biz.board.BoardService;
-import com.entertain.biz.board.BoardVO;
-import com.entertain.biz.board.CommentVO;
-import com.entertain.biz.board.Criteria;
+import com.entertain.biz.board.BoardDTO;
+import com.entertain.biz.board.CommentDTO;
+import com.entertain.biz.board.CriteriaDTO;
 
 
 @Service
@@ -20,37 +20,37 @@ public class BoardServiceImpl implements BoardService{
 	private BoardDAO boardDAO;
 
 
-public void createBoard(BoardVO vo) {
+public void createBoard(BoardDTO dto) {
 
-	boardDAO.createBoard(vo);
+	boardDAO.createBoard(dto);
 }
 	
 	
-	public List<Map<String, Object>> getBoardList(Criteria cri) {
+	public List<Map<String, Object>> getBoardList(CriteriaDTO cri) {
 		return boardDAO.getBoardList(cri);
 	}
 	
-	public List<Map<String, Object>> getSearchList(Criteria cri){
+	public List<Map<String, Object>> getSearchList(CriteriaDTO cri){
 
 		return boardDAO.getSearchList(cri);
 		
 	}
 	
 
-	public BoardVO getOneBoard(int number) {
+	public BoardDTO getOneBoard(int number) {
 		return boardDAO.getOneBoard(number);
 	}
 
 
 	@Override
-	public List<CommentVO> getCommentList(int number) {
+	public List<CommentDTO> getCommentList(int number) {
 		
 		return boardDAO.getCommentList(number);
 	}
 	
 	@Override
-	public void createComment(CommentVO vo) {
-		boardDAO.createComment(vo);
+	public void createComment(CommentDTO dto) {
+		boardDAO.createComment(dto);
 	}
 	@Override
 	public void deleteBoard(int number) {
@@ -58,12 +58,12 @@ public void createBoard(BoardVO vo) {
 	}
 
 	
-	public void updateBoard(BoardVO vo) {
-		boardDAO.updateBoard(vo);
+	public void updateBoard(BoardDTO dto) {
+		boardDAO.updateBoard(dto);
 	}
 	
-	public void updateComment(CommentVO vo) {
-		boardDAO.updateComment(vo);
+	public void updateComment(CommentDTO dto) {
+		boardDAO.updateComment(dto);
 	}
 
 	public void deleteComment(int number) {
@@ -83,7 +83,7 @@ public void createBoard(BoardVO vo) {
 		return boardDAO.getBoardCount();
 	}
 	
-	public int getSearchBoardCount(Criteria cri) {
+	public int getSearchBoardCount(CriteriaDTO cri) {
 		return boardDAO.getSearchBoardCount(cri);
 	}
 	

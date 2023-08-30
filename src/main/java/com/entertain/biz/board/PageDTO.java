@@ -1,8 +1,8 @@
 package com.entertain.biz.board;
 
 
-public class PageVO {
-	private Criteria cri;
+public class PageDTO {
+	private CriteriaDTO cri;
     private int totalCount;
     private int startPage;
     private int endPage;
@@ -10,10 +10,10 @@ public class PageVO {
     private boolean next;
     private int displayPageNum = 10;
     
-    public Criteria getCri() {
+    public CriteriaDTO getCri() {
         return cri;
     }
-    public void setCri(Criteria cri) {
+    public void setCri(CriteriaDTO cri) {
         this.cri = cri;
     }
     public int getTotalCount() {

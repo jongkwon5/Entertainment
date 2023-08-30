@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.entertain.biz.service.MemberServiceImpl;
-import com.entertain.biz.service.MemberVO;
+import com.entertain.biz.service.MemberDTO;
 
 
 @Controller
@@ -23,9 +23,9 @@ public class SignUpController {
 	private MemberServiceImpl memberImpl;
 	
 	@RequestMapping(value="/signUp.do", method=RequestMethod.POST)
-	public String insertMember(MemberVO vo,  HttpServletResponse response) throws IOException {
+	public String insertMember(MemberDTO dto,  HttpServletResponse response) throws IOException {
 		String returnURL = "";
-		memberImpl.insertMember(vo);
+		memberImpl.insertMember(dto);
 	
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();

@@ -2,7 +2,7 @@ package com.entertain.biz.board;
 
 import java.sql.Timestamp;
 
-public class BoardVO {
+public class BoardDTO {
 
 	private int board_number;
 	private String board_user_id;

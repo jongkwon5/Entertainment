@@ -3,7 +3,7 @@ pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@page import="java.util.Enumeration"%>
-<c:set var="context" value="${pageContext.request.contextPath}"/>
+<c:set var="path" value="${pageContext.request.contextPath}"/>
 <%request.setCharacterEncoding("utf-8");%>
 
 <!DOCTYPE html>
@@ -14,9 +14,16 @@ pageEncoding="UTF-8"%>
 <script src="https://kit.fontawesome.com/cd8f90f87a.js" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script type="text/javascript" src="http://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-<link rel="stylesheet" href="${context}/resources/css/stylesheet_main.css"/>
+<link rel="stylesheet" href="${path}/resources/css/stylesheet_main.css"/>
 <link rel="stylesheet" type="text/css" href="http://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
 </head>
+<style>
+#aaaa{
+width: 500px;
+height: 500px;
+
+}
+</style>
 <body>
 <div class="container">
 <!--**************************** 헤더 ****************************-->
@@ -26,27 +33,27 @@ pageEncoding="UTF-8"%>
         </ul>
         <ul class="header_menu">
 			<li>
-				<a class="btn btn_home" href="Entertain_main.do" style="cursor: pointer" >
+				<a class="btn btn_home" href="Entertain_main" style="cursor: pointer" >
 					<spring:message code="message.home"/>
 				</a>
 			</li>
 			<li>
-            	<a class="btn btn_company" href="Entertain_company.do" style="cursor: pointer">
+            	<a class="btn btn_company" href="Entertain_company" style="cursor: pointer">
             		<spring:message code="message.company"/>
             	</a>
 			</li>
 			<li>
-            	<a class="btn btn_artist" href="Entertain_artist.do" style="cursor: pointer">
+            	<a class="btn btn_artist" href="Entertain_artist" style="cursor: pointer">
             		<spring:message code="message.artist"/>
             	</a>
 			</li>
 			<li>
-	            <a class="btn btn_audition" href="Entertain_audition.do" style="cursor: pointer">
+	            <a class="btn btn_audition" href="Entertain_audition" style="cursor: pointer">
 	            	<spring:message code="message.audition"/>
 	            </a>
          	</li>
           	<li>
-	            <a class="btn btn_board" href="Entertain_board_list.do" style="cursor: pointer">
+	            <a class="btn btn_board" href="Entertain_board_list" style="cursor: pointer">
 	            	<spring:message code="message.board"/>
 	           	</a>
           	</li>
@@ -71,7 +78,7 @@ pageEncoding="UTF-8"%>
 <!--**************************** 메인 ****************************-->
 	<div class="main">
 		<div class="num_box">
-			<span class="current_num">[1 /</span>
+			<span class="current_num">[1 / </span>
 			<span class="total_num">3]</span>
 		</div>
 		<div class="main_wrap">
@@ -79,7 +86,7 @@ pageEncoding="UTF-8"%>
 			<div class="mv_section active">
 				<i class="up_1 fa-solid fa-angles-up fa-flip" style="--fa-animation-duration: 1.5s; cursor: pointer"></i>
 				<div class="img_ive img"></div>
-            	<video src="resources/Image/Home/mv_ive.mp4" preload="auto" autoplay="autoplay" loop="loop" muted="muted" volume="0"></video>
+        		<video src="${path}/resources/Image/Home/mv_ive.mp4" preload="auto" autoplay="autoplay" loop="loop" muted="muted" volume="0"></video> 
 				<div class="text_box active">
 					<div class="background_box background_box1"></div>
 					<p class="top_text">
@@ -93,7 +100,7 @@ pageEncoding="UTF-8"%>
 			<div class="mv_section active2">
 				<i class="up_1 fa-solid fa-angles-up fa-flip" style="--fa-animation-duration: 1.5s; cursor: pointer"></i>
             	<div class="img_lessar img"></div>
-            	<video src="resources/Image/Home/mv_lessar.mp4" preload="auto" autoplay="autoplay" loop="loop" muted="muted" volume="0"></video>
+            	<video src="${path}/resources/Image/Home/mv_lessar.mp4" preload="auto" autoplay="autoplay" loop="loop" muted="muted" volume="0"></video>
 				<div class="text_box active2">
 					<div class="background_box background_box2"></div>
               		<p class="top_text">
@@ -107,8 +114,8 @@ pageEncoding="UTF-8"%>
 			<div class="mv_section active3">
 				<i class="up_1 fa-solid fa-angles-up fa-flip" style="--fa-animation-duration: 1.5s; cursor: pointer"></i>
 				<div class="img_nmixx img"></div>
-				<video src="resources/Image/Home/mv_nmixx.mp4" preload="auto" autoplay="autoplay" loop="loop" muted="muted" volume="0"></video>
-            <div class="text_box active3">
+            	<video src="${path}/resources/Image/Home/mv_nmixx.mp4" preload="auto" autoplay="autoplay" loop="loop" muted="muted" volume="0"></video>
+           		<div class="text_box active3">
 				<div class="background_box background_box3"></div>
 					<p class="top_text">
 						<spring:message code="message.nmixx.top"/>

@@ -24,10 +24,10 @@
     <input type="hidden" value="${board.board_user_id}" name="board_user_id">
       <div id="board_top">
      		<p>${board.board_title}</p>
-     		 <button type="button" id="allListBT" onclick="location.href='Entertain_board_list.do'">전체글</button>
+     		 <button type="button" id="allListBT" onclick="location.href='Entertain_board_list'">전체글</button>
     		  <c:if test="${board.board_user_id eq user.id}">
     		  <button type="button" id="deleteBT" onclick="deleteButton(event)">글삭제</button>
-    		   <button type="button" id="updateBT" onclick="location.href='getBoardUpdate.do?board_number=${board.board_number}'">글수정</button>
+    		   <button type="button" id="updateBT" onclick="location.href='getBoardUpdate?board_number=${board.board_number}'">글수정</button>
     		  </c:if>
   
       </div>
@@ -84,7 +84,7 @@
 
 <div class="comment-form">
     <h2>댓글 작성</h2>
-    <form action="createComment.do" method="get">
+    <form action="createComment" method="get">
     <input type="hidden" value="${board.board_number}" name="board_number">
     <input type="hidden" value="${user.id}" name="comment_user_id">
         <div class="form-group">
@@ -134,7 +134,7 @@ function updateComment(comment_number) {
     		   data : JSON.stringify({"comment_text": comment_text, "board_number": board_number, "comment_number": comment_number}),
     		   dataType : "json",
  
-    		  url:"<c:url value='updateComment.do'/>", 
+    		  url:"<c:url value='updateComment'/>", 
     		  success:function(data){ 
     			  console.log(data);
     			alert("성공");
@@ -165,7 +165,7 @@ function deleteButton(event){
 
 	var passwordChk = prompt("게시글을 삭제하시려면 회원 비밀번호를 입력하세요")
 	if(passwordChk === userPassword){
-	 location.href = "deleteBoard.do?board_number=" + board_number; 
+	 location.href = "deleteBoard?board_number=" + board_number; 
 }else{
 	alert("비밀번호 불일치");}
 }
@@ -175,7 +175,7 @@ function deleteComment(comment_number){
 	var passwordChk = prompt("댓글을 삭제하시려면 회원 비밀번호를 입력하세요")
 
 	if(passwordChk === userPassword){
-		location.href = "deleteComment.do?comment_number=" + comment_number + "&board_number=" + board_number; 
+		location.href = "deleteComment?comment_number=" + comment_number + "&board_number=" + board_number; 
 	 alert("일치");
 }else{
 	alert("비밀번호 불일치");}

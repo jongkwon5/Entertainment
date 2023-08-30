@@ -32,7 +32,7 @@ function login_check(){
 				<div id="background_box"></div>
         		<h2>로그인</h2>
         		<ul id="login_top">
-          			<form action="login_chk.do" method="post" name="frm" onsubmit="">
+          			<form action="login_chk" method="post" name="frm" onsubmit="">
           				<input type="hidden" name="cmd" value="member_login">
 						<li>
 							<input type="text" placeholder="아이디" id="id_name" name="id" />
@@ -54,7 +54,7 @@ function login_check(){
           			</form>
         		</ul>
 				<div id="login_bottom">
-          			<a href="Entertain_signup.do">회원가입</a>
+          			<a href="Entertain_signup">회원가입</a>
           			<a href="">아이디 찾기</a>
           			<a href="">비밀번호 찾기</a>
         		</div>

@@ -1,6 +1,6 @@
 package com.entertain.biz.board;
 
-public class Criteria {
+public class CriteriaDTO {
 	 private int page;
 	 private int perPageNum;
 	 private String board_text;
@@ -26,7 +26,7 @@ public class Criteria {
 	        return (this.page-1)*perPageNum;
 	    }
 	    
-	    public Criteria() {
+	    public CriteriaDTO() {
 	        this.page = 1;
 	        this.perPageNum = 10;
 	    }

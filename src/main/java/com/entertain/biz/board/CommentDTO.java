@@ -2,7 +2,7 @@ package com.entertain.biz.board;
 
 import java.sql.Timestamp;
 
-public class CommentVO {
+public class CommentDTO {
 
 	private int comment_number;
 	private int board_number;

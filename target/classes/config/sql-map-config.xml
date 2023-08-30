@@ -5,9 +5,9 @@
 	<properties resource="db.properties"/>
 	
 	<typeAliases>
-		<typeAlias alias="member" type="com.entertain.biz.service.MemberVO"/>
-		<typeAlias alias="board" type="com.entertain.biz.board.BoardVO"/>
-		<typeAlias alias="comment" type="com.entertain.biz.board.CommentVO"/>
+		<typeAlias alias="member" type="com.entertain.biz.service.MemberDTO"/>
+		<typeAlias alias="board" type="com.entertain.biz.board.BoardDTO"/>
+		<typeAlias alias="comment" type="com.entertain.biz.board.CommentDTO"/>
 	</typeAliases>
 	
 	<!-- DataSource설정 (applicationContext.xml에 설정하여 따로 설정 x)-->	

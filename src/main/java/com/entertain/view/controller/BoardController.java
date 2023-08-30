@@ -18,11 +18,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.entertain.biz.board.BoardVO;
-import com.entertain.biz.board.CommentVO;
+import com.entertain.biz.board.BoardDTO;
+import com.entertain.biz.board.CommentDTO;
 import com.entertain.biz.board.impl.BoardServiceImpl;
-import com.entertain.biz.board.Criteria;
-import com.entertain.biz.board.PageVO;
+import com.entertain.biz.board.CriteriaDTO;
+import com.entertain.biz.board.PageDTO;
 
 @Controller
 public class BoardController {
@@ -30,14 +30,17 @@ public class BoardController {
 	@Autowired
 	private BoardServiceImpl boardService;
 
-	@RequestMapping(value = "/Entertain_board_list.do", method = RequestMethod.GET)
-	public ModelAndView getBoardList(BoardVO vo, Model model, Criteria cri, HttpServletRequest request) {
+	@RequestMapping(value = "/Entertain_board_list", method = RequestMethod.GET)
+	public ModelAndView getBoardList(BoardDTO dto, Model model, CriteriaDTO cri, 
+			/* @RequestParam("board_number") int board_number, */
+			
+			HttpServletRequest request) {
 		String searchType = request.getParameter("searchType");
 			String searchInput =request.getParameter("searchInput");
 		
-		ModelAndView mav = new ModelAndView("/Entertain_board_list.jsp");
+		ModelAndView mav = new ModelAndView("/Entertain_board_list");
 		if(searchType == null && searchInput == null) {
-			 PageVO pageVO = new PageVO();
+			 PageDTO pageVO = new PageDTO();
 			 pageVO.setCri(cri);
 			 pageVO.setTotalCount(boardService.getBoardCount());
 			 model.addAttribute("total",boardService.getBoardCount());
@@ -50,7 +53,7 @@ public class BoardController {
 				cri.setBoard_text(searchInput);
 				int total = boardService.getSearchBoardCount(cri);
 				System.out.println("값"+total);
-				 PageVO pageVO = new PageVO();
+				 PageDTO pageVO = new PageDTO();
 				 pageVO.setCri(cri);
 				 pageVO.setTotalCount(total);
 				 model.addAttribute("total",total);
@@ -85,34 +88,34 @@ public class BoardController {
 	 * System.out.println("후"); return mav; }
 	 */
 
-	@RequestMapping(value = "/boardWrite.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/boardWrite", method = RequestMethod.GET)
 	public String getboardWrite() {
-		return "Entertain_board_write.jsp";
+		return "Entertain_board_write";
 	}
 	
-	@RequestMapping(value = "/getBoardUpdate.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/getBoardUpdate", method = RequestMethod.GET)
 	public String getBoardUpdate(@RequestParam("board_number") int board_number, Model model) {
 		model.addAttribute("getOneCommentCount", boardService.getOneCommentCount(board_number));
 		model.addAttribute("board", boardService.getOneBoard(board_number));
 		model.addAttribute("comment", boardService.getCommentList(board_number));
-		return "Entertain_board_update.jsp";
+		return "Entertain_board_update";
 	}
 	
-	@RequestMapping(value = "/updateBoard.do", method = RequestMethod.GET)
-	public String updateBoard(BoardVO vo) {
-		boardService.updateBoard(vo);
-		return "getOneBoard.do";
+	@RequestMapping(value = "/updateBoard", method = RequestMethod.GET)
+	public String updateBoard(BoardDTO dto) {
+		boardService.updateBoard(dto);
+		return "getOneBoard";
 	}
 	
 
-	@RequestMapping(value = "/createBoard.do", method = RequestMethod.GET)
-	public String createBoard(BoardVO vo) {
-		boardService.createBoard(vo);
-		return "redirect:/Entertain_board_list.do";
+	@RequestMapping(value = "/createBoard", method = RequestMethod.GET)
+	public String createBoard(BoardDTO dto) {
+		boardService.createBoard(dto);
+		return "redirect:/Entertain_board_list";
 //		return "Entertain_board_list.do";
 	}
 
-	@RequestMapping(value = "/getOneBoard.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/getOneBoard", method = RequestMethod.GET)
 	public String getOneBoard(@RequestParam("board_number") int board_number, Model model) {
 	
 		System.out.println("아오");
@@ -122,32 +125,32 @@ public class BoardController {
 		boardService.setBoardViewCount(board_number);
 		model.addAttribute("board", boardService.getOneBoard(board_number));
 		model.addAttribute("comment", boardService.getCommentList(board_number));
-		return "Entertain_board_read.jsp";
+		return "Entertain_board_read";
 	}
 
- @RequestMapping(value="/createComment.do", method=RequestMethod.GET)
- 	public String createComment(RedirectAttributes redirect, CommentVO vo, @RequestParam("board_number") int board_number) { 
+ @RequestMapping(value="/createComment", method=RequestMethod.GET)
+ 	public String createComment(RedirectAttributes redirect, CommentDTO dto, @RequestParam("board_number") int board_number) { 
 	 System.out.println("asdasd");
-	 boardService.createComment(vo); 
+	 boardService.createComment(dto); 
 	 System.out.println("후");
 	  
 	 redirect.addAttribute("board_number", board_number);
-	  return "redirect:/getOneBoard.do"; 
+	  return "redirect:/getOneBoard"; 
 	  }
  
- @RequestMapping(value="/deleteBoard.do")
+ @RequestMapping(value="/deleteBoard")
 	public String deleteBoard(int board_number) { 
 	 boardService.deleteBoard(board_number);
-	  return "Entertain_board_list.do"; 
+	  return "Entertain_board_list"; 
 	  }
  	
- 	@RequestMapping(value = "updateComment.do")
+ 	@RequestMapping(value = "updateComment")
 	@ResponseBody
-	public Map<Object, Object> updateComment(@RequestBody CommentVO vo){
+	public Map<Object, Object> updateComment(@RequestBody CommentDTO dto){
  		
  		System.out.println("씨바라라라라라");
- 		System.out.println(vo.getComment_number());
-		boardService.updateComment(vo);
+ 	
+		boardService.updateComment(dto);
 		Map<Object, Object> map = new HashMap<Object, Object>();
 		map.put("success", "success");
         return map;
@@ -155,11 +158,11 @@ public class BoardController {
 	
 	}
  	
- 	@RequestMapping(value = "deleteComment.do")
+ 	@RequestMapping(value = "deleteComment")
 	public String deleteComment(int comment_number){
 		boardService.deleteComment(comment_number);
 
-        return "getOneBoard.do";
+        return "getOneBoard";
         
 	
 	}

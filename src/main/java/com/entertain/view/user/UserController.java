@@ -15,36 +15,36 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.entertain.biz.service.MemberServiceImpl;
-import com.entertain.biz.service.MemberVO;
+import com.entertain.biz.service.MemberDTO;
 
 @Controller
 @SessionAttributes("user")
 public class UserController{
 	@Autowired
 	MemberServiceImpl service;
-	@RequestMapping(value="/login.do", method=RequestMethod.GET)
+	@RequestMapping(value="/login", method=RequestMethod.GET)
 	public String login(HttpSession session) { //${userVO.id}, userVO.password
 		String returnURL = "";
 		String name = (String)session.getAttribute("NAME");
 		if(name != null) {
-			returnURL = "Entertain_mypage.jsp";
+			returnURL = "Entertain_mypage";
 		}else {
-			returnURL = "Entertain_login.jsp";
+			returnURL = "Entertain_login";
 		}
 		return returnURL;
 	}
 	
-	@RequestMapping(value="/login_chk.do", method=RequestMethod.POST)
-	public String login_chk(HttpSession session, Model model, MemberVO vo) {
+	@RequestMapping(value="/login_chk", method=RequestMethod.POST)
+	public String login_chk(HttpSession session, Model model, MemberDTO vo) {
 		String returnURL = "";
-		MemberVO loginvo =service.getMember(vo);
+		MemberDTO loginvo =service.getMember(vo);
 		if(loginvo != null) { //로그인 성공적으로 했다는 뜻
 			System.out.println("로그인 성공!");
 				model.addAttribute("user", service.getMember(vo));
-				returnURL = "Entertain_main.jsp"; // 로그인 성공했다는 뜻			
+				returnURL = "/Entertain_main"; // 로그인 성공했다는 뜻			
 		}else {
 			System.out.println("로그인 실패!");
-				returnURL = "Entertain_login.jsp"; // 로그인 실패했다는 뜻
+				returnURL = "/Entertain_login"; // 로그인 실패했다는 뜻
 		}
 		return returnURL;
 	}
@@ -58,7 +58,7 @@ public class UserController{
 			out.println("<script>alert('로그아웃 되었습니다'); location.href='login.do';</script>");
 			out.flush();
 
-			return "Entertain_main.do";
+			return "Entertain_main";
 		}
 	}
 

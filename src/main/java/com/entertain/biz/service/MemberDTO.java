@@ -1,6 +1,6 @@
 package com.entertain.biz.service;
 
-public class MemberVO {
+public class MemberDTO {
 
 	
 	public String getId() {

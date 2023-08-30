@@ -8,9 +8,9 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.entertain.biz.board.BoardVO;
-import com.entertain.biz.board.CommentVO;
-import com.entertain.biz.board.Criteria;
+import com.entertain.biz.board.BoardDTO;
+import com.entertain.biz.board.CommentDTO;
+import com.entertain.biz.board.CriteriaDTO;
 
 @Repository
 public class BoardDAO {
@@ -18,43 +18,43 @@ public class BoardDAO {
 	@Autowired
 	SqlSessionTemplate mybatis;
 	
-	public List<Map<String, Object>> getBoardList(Criteria cri) {
+	public List<Map<String, Object>> getBoardList(CriteriaDTO cri) {
 
 		return mybatis.selectList("BoardDAO.getBoardList", cri);
 	}
 	
-	public List<Map<String, Object>> getSearchList(Criteria cri){
+	public List<Map<String, Object>> getSearchList(CriteriaDTO cri){
 
 		return mybatis.selectList("BoardDAO.getSearchList", cri);
 	}
 	
-	public void createBoard(BoardVO vo) {
+	public void createBoard(BoardDTO dto) {
 
-		mybatis.insert("BoardDAO.createBoard", vo);
+		mybatis.insert("BoardDAO.createBoard", dto);
 	}
 
-	public BoardVO getOneBoard(int number) {
+	public BoardDTO getOneBoard(int number) {
 		return mybatis.selectOne("BoardDAO.getOneBoard", number);
 	}
 	
-	public List<CommentVO> getCommentList(int number) {
+	public List<CommentDTO> getCommentList(int number) {
 		return mybatis.selectList("BoardDAO.getCommentList", number);
 	}
 	
-	public void createComment(CommentVO vo) {
-		mybatis.insert("BoardDAO.createComment", vo);
+	public void createComment(CommentDTO dto) {
+		mybatis.insert("BoardDAO.createComment", dto);
 	}
 	
 	public void deleteBoard(int number) {
 		mybatis.delete("BoardDAO.deleteBoard", number);
 	}
 	
-	public void updateBoard(BoardVO vo) {
-		mybatis.update("BoardDAO.updateBoard", vo);
+	public void updateBoard(BoardDTO dto) {
+		mybatis.update("BoardDAO.updateBoard", dto);
 	}
 	
-	public void updateComment(CommentVO vo) {
-		mybatis.update("BoardDAO.updateComment", vo);
+	public void updateComment(CommentDTO dto) {
+		mybatis.update("BoardDAO.updateComment", dto);
 	}
 	
 	public void deleteComment(int number) {
@@ -73,7 +73,7 @@ public class BoardDAO {
 		return mybatis.selectOne("BoardDAO.getBoardCount");
 	}
 	
-	public int getSearchBoardCount(Criteria cri) {
+	public int getSearchBoardCount(CriteriaDTO cri) {
 		return mybatis.selectOne("BoardDAO.getSearchBoardCount", cri);
 	}
 }

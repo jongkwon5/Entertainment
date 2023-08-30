@@ -5,23 +5,23 @@ import java.util.Map;
 
 public interface BoardService {
 
-	List<Map<String, Object>> getBoardList(Criteria cri);
+	List<Map<String, Object>> getBoardList(CriteriaDTO cri);
 
-	List<Map<String, Object>> getSearchList(Criteria cri);
+	List<Map<String, Object>> getSearchList(CriteriaDTO cri);
 	 
-	 void createBoard(BoardVO vo);
+	 void createBoard(BoardDTO vo);
 	 
-	 BoardVO getOneBoard(int number);
+	 BoardDTO getOneBoard(int number);
 	 
-	 List<CommentVO> getCommentList(int number);
+	 List<CommentDTO> getCommentList(int number);
 	
-	 void createComment(CommentVO vo);
+	 void createComment(CommentDTO vo);
 	 
 	 void deleteBoard(int number);
 	 
-	 void updateBoard(BoardVO vo);
+	 void updateBoard(BoardDTO vo);
 	 
-	 void updateComment(CommentVO vo);
+	 void updateComment(CommentDTO vo);
 	 
 	 void deleteComment(int number);
 	 
@@ -31,7 +31,7 @@ public interface BoardService {
 	 
 	int getBoardCount();
 	
-	int getSearchBoardCount(Criteria cri);
+	int getSearchBoardCount(CriteriaDTO cri);
 	 
 	 
 }
