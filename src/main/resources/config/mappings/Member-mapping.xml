@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Member">
+
+	<!-- 상세검색 -->
+	<select id="getMember" resultType="member" >
+		select * from enter_user where id=#{id} and password=#{password};
+	</select>
+	
+	<insert id="insertMember" parameterType="member">
+		insert into enter_user(id, password, password2, name, email, phone) 
+		values(#{id},#{password},#{password2},#{name},#{email},#{phone});
+	</insert>
+</mapper>
+

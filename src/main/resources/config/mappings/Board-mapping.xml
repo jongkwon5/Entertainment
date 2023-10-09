@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="BoardDAO">
+	<resultMap type="board" id="enter_Board">
+		<id property="board_number"  column="Board_Number"/>  <!-- primary key매핑 -->
+		<result property="board_user_id" column="Board_User_Id"/>
+		<result property="board_title" column="Board_Title"/>
+		<result property="board_text" column="Board_Text"/>
+		<result property="board_create_date" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp" column="Board_Create_Date"/>
+		<result property="board_view_count" column="Board_View_Count"/>
+		<!-- <result property="chat_create_date" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp" column="ChattingRoom_Create_Date"/> -->
+	</resultMap>
+	
+	<resultMap type="comment" id="enter_comment">
+		<id property="comment_number"  column="Comment_Number"/>  <!-- primary key매핑 -->
+		<result property="board_number" column="Board_Number"/>
+		<result property="comment_user_id" column="Comment_User_Id"/>
+		<result property="comment_text" column="Comment_Text"/>
+		<result property="comment_create_date" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp" column="Comment_Create_Date"/>
+		<result property="comment_update_count" column="Commnet_Update_Count"/>
+		<!-- <result property="chat_create_date" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp" column="ChattingRoom_Create_Date"/> -->
+	</resultMap>
+	
+	<select id="getBoardCount" resultType="int"> SELECT COUNT(*) FROM enter_board; </select>
+	
+	<select id="getSearchBoardCount" resultType="int">
+		SELECT COUNT(*) FROM enter_Board e
+		<if test="search_type=='title'"> WHERE e.Board_Title LIKE CONCAT('%', #{board_text}, '%') </if>
+		<if test="search_type=='writer'"> WHERE e.Board_User_Id LIKE CONCAT('%', #{board_text}, '%') </if>
+	</select>
+	
+	<select id="getSearchList" parameterType="hashmap" resultType="hashmap">
+		SELECT e.*, (SELECT COUNT(*) FROM enter_comment c WHERE c.Board_Number = e.Board_Number) AS comment_count FROM enter_board e
+		<if test="search_type=='title'"> WHERE e.Board_Title LIKE CONCAT('%', #{board_text}, '%') </if>
+		<if test="search_type=='writer'"> WHERE e.Board_User_Id LIKE CONCAT('%', #{board_text}, '%') </if>
+		ORDER BY e.Board_Number DESC LIMIT #{pageStart}, #{perPageNum};
+	</select>
+	
+	<select id="getBoardList" parameterType="hashmap" resultType="hashmap">
+		<![CDATA[ SELECT eb.*, (SELECT COUNT(*) FROM enter_comment ec WHERE ec.Board_Number = eb.Board_Number) AS comment_count FROM enter_board eb ORDER BY eb.Board_Number DESC LIMIT #{pageStart}, #{perPageNum} ]]>
+	</select>
+	
+	<select id="getOneCommentCount" resultType="Integer"> 
+		SELECT COUNT(*) AS comment_count FROM enter_comment WHERE Board_Number = #{board.number} GROUP BY Board_Number; 
+	</select>
+	
+	<insert id="createBoard" useGeneratedKeys="true" parameterType="board">
+		insert into enter_Board(Board_Number, Board_User_Id, Board_Title, Board_Text, Board_Create_Date, Board_view_Count)
+		values(#{board_number},#{board_user_id},#{board_title},#{board_text},now(),"0"); 
+	</insert>
+	
+	<select id="getOneBoard" resultMap="enter_Board"> 
+		SELECT * FROM enter_Board WHERE Board_Number = #{board.number};
+ 	</select>
+ 	
+	<select id="getCommentList" resultMap="enter_comment"> 
+		SELECT Comment_Number, Board_Number, Comment_User_Id, Comment_Text, Comment_Create_Date, Comment_Update_Count, @row_number := @row_number + 1 AS Board_Number_Count 
+		FROM (SELECT * FROM enter_comment WHERE Board_Number = #{board_number} 
+		ORDER BY Comment_Create_Date ASC) AS ordered_comments, (SELECT @row_number := 0) AS t 
+		ORDER BY Board_Number_Count DESC;
+	</select>
+	
+	<insert id="createComment" useGeneratedKeys="true" parameterType="comment"> 
+		insert into enter_comment(Comment_Number, Board_Number, Comment_User_Id, Comment_Text, Comment_Create_Date)
+		values(#{comment_number},#{board_number},#{comment_user_id},#{comment_text},now());
+	</insert>
+	
+	<delete id="deleteBoard" parameterType="int"> 
+		delete from enter_Board WHERE Board_Number = #{board.number};
+	 </delete>
+
+	<delete id="deleteComment" parameterType="int"> 
+		delete from enter_comment WHERE Comment_Number = #{comment.number}; 
+	</delete>
+	
+	<update id="updateBoard"> 
+		update enter_Board set Board_Title = #{board_title}, Board_Text = #{board_text} WHERE Board_Number = #{board_number}; 
+	</update>
+	
+	<update id="updateComment"> 
+		update enter_comment set Comment_Text = #{comment_text}, Comment_Create_Date = now(), comment_update_count = '1' 
+		WHERE Comment_Number = #{comment_number} and Board_Number = #{board_number}; 
+	</update>
+	
+	<update id="setBoardViewCount">
+		 update enter_Board set Board_View_Count = Board_View_Count + 1 where Board_Number = #{board_number};
+	</update>
+	
+</mapper>

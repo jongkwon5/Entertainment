@@ -1,0 +1,130 @@
+@charset "UTF-8";
+@font-face {
+  font-family: "TheJamsil5Bold";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302_01@1.0/TheJamsil5Bold.woff2")
+    format("woff2");
+  font-weight: bold;
+  font-style: unset;
+}
+@font-face {
+  font-family: "HSBombaram";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/HSBombaram.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+* {
+  list-style: none;
+}
+a {
+  text-decoration-line: none;
+  color: black;
+}
+
+
+body {
+  margin: 0;
+  color: white;
+}
+
+
+/* <!-- ************************하단***************************** --> */
+.footer {
+  align-items: center;
+  display: flex;
+  position: absolute;
+  background-color: transparent;
+  justify-content: space-around;
+  width: 100%;
+  z-index: 10;
+  left: 0;
+ 
+  height: 60px;
+  color: black;
+  overflow: hidden;
+  font-size: 14px;
+}
+.footer_box {
+  position: relative;
+  justify-content: space-around;
+  align-items: center;
+  display: flex;
+  width: 40%;
+  padding: 0;
+  left: 1%;
+  opacity: 0;
+}
+
+.footer p {
+  font-family: "TheJamsil5Bold";
+  font-size: 14px;
+  margin: 0;
+}
+
+#footer_sns {
+  display: flex; /* 가운데 정렬 */
+  justify-content: space-around; /* 헤더내 좌우 공간 정렬 */
+  /* 헤더내 상하 정중앙 */
+
+  /* 메뉴 버튼 가로 정렬 */
+  width: 200px;
+  padding: 0px; /* 제일 왼쪽 메뉴 패딩값 */
+  margin: 0px;
+  font-size: 30px;
+}
+
+.fa-square-facebook:hover {
+  color: blue;
+  transition: all 0.5s;
+}
+.fa-instagram:hover {
+  color: rgb(214, 23, 97);
+  transition: all 0.5s;
+}
+.fa-square-twitter:hover {
+  color: skyblue;
+  transition: all 0.5s;
+}
+.fa-square-youtube:hover {
+  color: red;
+  transition: all 0.5s;
+}
+
+.footer_menu {
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-transform: perspective(1px) translateZ(0);
+  transform: perspective(1px) translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  color: white;
+}
+.footer_menu:before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  left: 51%;
+  right: 51%;
+  bottom: 0;
+
+  background: #2098d1;
+  height: 3px;
+  -webkit-transition-property: left, right;
+  transition-property: left, right;
+  -webkit-transition-duration: 0.2s;
+  transition-duration: 0.2s;
+  -webkit-transition-timing-function: ease-out;
+  transition-timing-function: ease-out;
+}
+.footer_menu:hover:before,
+.footer_menu:focus:before,
+.footer_menu:active:before {
+  left: 0;
+  right: 0;
+}
+.footer_menu p {
+  margin-bottom: 5px;
+}

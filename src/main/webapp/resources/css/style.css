@@ -1,0 +1,227 @@
+body {
+  font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+ 
+  font-weight: 300; }
+
+p {
+
+  font-weight: 300; }
+
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6 {
+  font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"; }
+
+a {
+  -webkit-transition: .3s all ease;
+  -o-transition: .3s all ease;
+  transition: .3s all ease;
+  color:white; }
+a:hover {
+   color: #007BFF;}
+
+.content {
+  padding: 7rem 0; }
+
+h2 {
+  font-size: 20px;
+  color: #fff; }
+.fa-solid{
+	color:white;
+	    align-self: center;
+}
+.fa-solid:hover{
+	color:#007BFF;
+}
+.container{
+	width: 100%;
+	margin:0px;
+	 background-color: #3c373e;
+}  
+.pageNum{
+	color:white;
+	    font-weight: bold;
+    font-size: 19px;
+    margin-right: 8px;
+    margin-left:8px;
+}
+.pageNum:hover{
+	color:#007BFF;
+}
+
+#main{
+    width: 70%;
+        min-height: 86.7vh;
+    position: relative;
+ 
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, 10%)
+}     
+
+.search-bar {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    justify-content: right;
+}
+
+#bottomButton{
+	position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+	
+}
+
+#searchType{
+
+display: block;
+    width: 6%;
+    height: 36px;
+    padding-left: 8px;
+    line-height: 30px;
+    margin: 0px 0 0 3px;
+    background-color: #fff;
+    font-size: 14px;
+    color: #29367c;
+    padding: 3px;
+    border-radius: 4px;
+    border: 3px solid #007BFF;
+
+}
+
+
+#writeButton {
+    background-color: #28a745;
+    color: #fff;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 20px auto;
+    position: relative;
+    margin: 0px;
+    padding: 5px 10px;
+    height: 30%;
+    place-self: center;
+    width: 9%;
+     border: 3px solid #28a745;
+}
+
+#writeButton:hover {
+    background-color: #1e7e34;
+}
+
+#searchType:focus{
+    border: 1px solid #9B51E0;
+    box-sizing: border-box;
+    border-radius: 10px;
+
+    border-radius: 10px;
+    text-align: center;
+}
+#searchInput {
+  
+     padding: 3px;
+   
+    border-radius: 4px;
+    border: 3px solid #007BFF;
+}
+
+#searchButton {
+    padding: 5px 10px;
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+
+    cursor: pointer;
+}
+
+#allListButton {
+       padding: 5px 10px;
+    background-color: #007BFF;
+    color: white;
+    cursor: pointer;
+    width: 7%;
+    border-radius: 4px;
+    border: 3px solid #007BFF;
+      height: 30%;
+    place-self: center;
+}
+
+#navi{
+	width: 50%;
+    text-align: center;
+    position: relative;
+    height: 100%;
+    place-self: center;
+}
+    
+
+
+
+#searchButton:hover {
+    background-color: #0056b3;
+}
+
+ul{
+	
+	margin-top:16px;
+}
+
+@media (min-width: 1200px) {
+    .container,.container-lg,.container-md,.container-sm,.container-xl {
+        max-width:100%;
+    }
+}
+
+.custom-table {
+  min-width: 900px;
+  margin-bottom:0px; }
+  .custom-table thead tr, .custom-table thead th {
+    padding-bottom: 20px;
+    border-top: none;
+    border-bottom: none !important;
+    color: #fff;
+    font-size: 16px;
+    text-transform: uppercase;
+    letter-spacing: .2rem; }
+  .custom-table tbody th, .custom-table tbody td {
+    color: #777;
+    font-weight: 400;
+    padding-bottom: 20px;
+    padding-top: 20px;
+    font-weight: 300;
+    border: none;
+    -webkit-transition: .3s all ease;
+    -o-transition: .3s all ease;
+    transition: .3s all ease; }
+    .custom-table tbody th small, .custom-table tbody td small {
+      color: rgba(255, 255, 255, 0.3);
+      font-weight: 300; }
+    .custom-table tbody th a, .custom-table tbody td a {
+      color: rgba(255, 255, 255, 0.3); }
+    .custom-table tbody th .more, .custom-table tbody td .more {
+      color: rgba(255, 255, 255, 0.3);
+      font-size: 11px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: .2rem; }
+  .custom-table tbody tr {
+    -webkit-transition: .3s all ease;
+    -o-transition: .3s all ease;
+    transition: .3s all ease; }
+    .custom-table tbody tr:hover td, .custom-table tbody tr:focus td {
+      color: #fff; }
+      .custom-table tbody tr:hover td a, .custom-table tbody tr:focus td a {
+        color: #fdd114; }
+      .custom-table tbody tr:hover td .more, .custom-table tbody tr:focus td .more {
+        color: #fdd114; }
+  .custom-table .td-box-wrap {
+    padding: 0; }
+  .custom-table .box {
+    background: #fff;
+    border-radius: 4px;
+    margin-top: 15px;
+    margin-bottom: 15px; }
+    .custom-table .box td, .custom-table .box th {
+      border: none !important; }
