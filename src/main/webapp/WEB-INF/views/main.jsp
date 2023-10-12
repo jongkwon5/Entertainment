@@ -38,11 +38,6 @@ pageEncoding="UTF-8"%>
             		<spring:message code="message.artist"/>
             	</a>
 			</li>
-			<li>
-	            <a class="btn btn_audition" href="${context}/audition" style="cursor: pointer">
-	            	<spring:message code="message.audition"/>
-	            </a>
-         	</li>
           	<li>
 	            <a class="btn btn_board" href="${context}/boardList" style="cursor: pointer">
 	            	<spring:message code="message.board"/>
@@ -51,16 +46,16 @@ pageEncoding="UTF-8"%>
 		</ul>
 		<ul class="header_mypage">
 			<c:choose>
-				<c:when test="${empty user.name}">
+				<c:when test="${empty user.user_name}">
 					<div class="my_page_icon" style="background-image: url('resources/Image/Entire/default_2.png')"
 						onclick="location.href='login'">
 					</div>
 				</c:when>
 				<c:otherwise>
 					<div class="my_page_icon" style="background-image: url('resources/Image/Entire/default_2.png')"
-						onclick="location.href='myPage'">
+						onclick="location.href='main'">
 					</div>
-					<p id="hidden_name">${user.name}님</p>
+					<p id="hidden_name">${user.user_name}님</p>
 					<button name="cmd" id="logout" type="submit" onclick="location.href='logOut'">logout</button>
 				</c:otherwise>
 			</c:choose>
@@ -120,7 +115,7 @@ pageEncoding="UTF-8"%>
 <!-- ****************************하단**************************** -->
 	<div class="footer">
 		<c:choose>
-			<c:when test="${user.id == 'admin'}">
+			<c:when test="${user.user_id == 'admin'}">
 				<span style="float:right;margin-right: 50px; color:red;">
 					<a href="/parkJK/Entertain/view/admin_home.jsp">안녕하세요 관리자님! 환영합니다</a><br><br>
 				</span>

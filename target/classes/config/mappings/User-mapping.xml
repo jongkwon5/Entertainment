@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="UserDAO">
+	<resultMap type="user" id="enter_user">
+		<id property="user_id" column="User_Id"/>  <!-- primary key매핑 -->
+		<result property="user_password" column="User_Password"/>
+		<result property="user_name" column="User_Name"/>
+		<result property="user_photo" column="User_Photo"/>
+		<!-- <result property="chat_create_date" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp" column="ChattingRoom_Create_Date"/> -->
+	</resultMap>
+
+	<select id="getUserIdCheck" parameterType="String" resultType="int"> 
+		SELECT COUNT(*) FROM enter_user WHERE User_Id = #{user_id};
+	</select>
+	
+	<insert id="createUserInfo" useGeneratedKeys="true" parameterType="user">
+		insert into enter_user(User_Id, User_Password, User_Name)
+		values(#{user_id},#{user_password},#{user_name}); 
+	</insert>
+	
+	<select id="getUserInfo" resultMap="enter_user">
+		select * from enter_user where User_Id = #{user_id} and User_Password = #{user_password};
+	</select>
+</mapper>

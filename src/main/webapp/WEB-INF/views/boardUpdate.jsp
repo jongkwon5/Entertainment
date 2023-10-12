@@ -23,7 +23,7 @@
 	      		<div id="board_top">
      				<input type="text" id="title" name="board_title" value="${board.board_title}" required>
      		 		<button type="button" id="allListButton" onclick="location.href='boardList'">전체글</button>
-    		  		<c:if test="${board.board_user_id eq user.id}">
+    		  		<c:if test="${board.board_user_id eq user.user_id}">
     		 			<button type="button" id="deleteBT" onclick="deleteButton(event)">글삭제</button>
     		   			<button type="button" id="updateBT" onclick="updateButton(event)">글수정</button>
     		  		</c:if>
@@ -54,7 +54,7 @@
 			            				<fmt:formatDate value="${comment.comment_create_date}" pattern="MM월 dd일 a HH시 mm분" />
 			            				<c:if test="${comment.comment_update_count == 1}">(수정됨)</c:if>
 		   							</td>
-			            			<c:if test="${comment.comment_user_id eq user.id}">
+			            			<c:if test="${comment.comment_user_id eq user.user_id}">
 			            				<td><button id="commentUpdate_${comment.comment_number}" onclick="updateComment(${comment.comment_number})">수정하기</button></td>
 			            				<td><button id="commentDelete_${comment.comment_number}" onclick="deleteComment(${comment.comment_number})">삭제하기</button></td>
 			            			</c:if>
@@ -68,7 +68,7 @@
 			    <h2>댓글 작성</h2>
 			    <form action="createComment" method="get">
 			    <input type="hidden" value="${board.board_number}" name="board_number">
-			    <input type="hidden" value="${user.id}" name="comment_user_id">
+			    <input type="hidden" value="${user.user_id}" name="comment_user_id">
 			        <div class="form-group">
 			            <textarea id="comment-text" name="comment_text" placeholder="댓글 내용" required></textarea>
 			        </div>
@@ -80,7 +80,7 @@
 </div>
 
 <script>
-var userPassword = "${user.password}";
+var userPassword = "${user.user_password}";
 var boardNumber = "${board.board_number}";
 function deleteButton(event){
 	var passwordChk = prompt("게시글을 삭제하시려면 회원 비밀번호를 입력하세요");

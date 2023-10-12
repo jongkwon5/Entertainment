@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -29,7 +30,7 @@ public class BoardController {
 
 	@Autowired
 	private BoardServiceImpl boardService;
-
+	
 	@RequestMapping(value = "/boardList", method = RequestMethod.GET)
 	public ModelAndView getBoardList(Model model, Criteria cri, HttpServletRequest request) {
 		String searchType = request.getParameter("searchType");

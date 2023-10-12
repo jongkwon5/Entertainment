@@ -13,7 +13,7 @@
 <body>
 	<div class="footer">
 		<c:choose>
-			<c:when test="${sessionScope.ID == 'admin'}">
+			<c:when test="${user.user_id == 'admin'}">
 				<span style="float:right;margin-right: 50px; color:red;">
 					<a href="/parkJK/Entertain/view/admin_home.jsp">안녕하세요 관리자님! 환영합니다</a><br><br>
 				</span>

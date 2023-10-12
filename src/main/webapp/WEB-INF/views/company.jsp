@@ -70,11 +70,6 @@
 			</a>
 		</li>
 		<li class="footer_menu" >
-			<a href="audition">
-				<p>AUDITION</p>
-			</a>
-		</li>
-		<li class="footer_menu" >
 			<a href="boardList">
 				<p>BOARD</p>
 			</a>
@@ -129,11 +124,6 @@
 	            		<spring:message code="message.artist"/>
 	            	</a>
 				</li>
-				<li>
-		            <a class="btn btn_audition" href="${context}/audition" style="cursor: pointer">
-		            	<spring:message code="message.audition"/>
-		            </a>
-	         	</li>
 	          	<li>
 		            <a class="btn btn_board" href="${context}/boardList" style="cursor: pointer">
 		            	<spring:message code="message.board"/>
@@ -142,16 +132,16 @@
 			</ul>
 			<ul class="header_mypage">
 				<c:choose>
-					<c:when test="${empty user.name}">
+					<c:when test="${empty user.user_name}">
 						<div class="my_page_icon" style="background-image: url('resources/Image/Entire/default_2.png')"
 							onclick="location.href='login'">
 						</div>
 					</c:when>
 					<c:otherwise>
 						<div class="my_page_icon" style="background-image: url('resources/Image/Entire/default_2.png')"
-							onclick="location.href='myPage'">
+							onclick="location.href='main'">
 						</div>
-						<p id="hidden_name">${user.name}님</p>
+						<p id="hidden_name">${user.user_name}님</p>
 						<button name="cmd" id="logout" type="submit" onclick="location.href='logOut'">logout</button>
 					</c:otherwise>
 				</c:choose>

@@ -1,5 +1,7 @@
 package com.entertain.view.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -14,7 +16,7 @@ public class MainController {
 	
 	@RequestMapping(value="/company")
 	public String company() {
-		return "/company";
+		return "company";
 	}
 	
 	@RequestMapping(value="/signup")
@@ -30,10 +32,23 @@ public class MainController {
 	@RequestMapping(value="/audition")
 	public String audition() {
 		return "audition";
+	}	
+	
+	@RequestMapping(value="/signUp")
+	public String signUp() {
+		return "signUp";
 	}
 	
-	@RequestMapping(value="/mypage")
-	public String myPage() {
-		return "mypage";
+	@RequestMapping(value="/login", method=RequestMethod.GET)
+	public String login(HttpSession session) {
+		String returnURL = "";
+		String name = (String)session.getAttribute("NAME");
+		if(name != null) {
+			returnURL = "myPage";
+		}else {
+			returnURL = "login";
+		}
+		return returnURL;
 	}
+	
 }

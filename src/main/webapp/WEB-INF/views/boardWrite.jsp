@@ -18,7 +18,7 @@
 		<div id="main">
     		<h1>게시판</h1>
     		<form class="post-form" action="createBoard" method="get">
-	    		<input type="hidden" value="${user.id}" name="board_user_id">
+	    		<input type="hidden" value="${user.user_id}" name="board_user_id">
 	      		<div class="form-group">
 	        		<label for="title">제목</label>
 	        		<input type="text" id="title" name="board_title" placeholder="제목을 입력하세요" required>

@@ -91,7 +91,7 @@
 					                <a href="${prevUrl}"><i class="fa-solid fa-circle-chevron-left fa-lg"></i></a>
 					            </li>
 					        </c:if>
-					        <c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage }" var="pageNum">
+					        <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="pageNum">
 					            <li>
 					                <c:url value="/boardList" var="pageUrl">
 					                    <c:param name="page" value="${pageNum}"/>

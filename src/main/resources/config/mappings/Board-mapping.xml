@@ -22,7 +22,9 @@
 		<!-- <result property="chat_create_date" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp" column="ChattingRoom_Create_Date"/> -->
 	</resultMap>
 	
-	<select id="getBoardCount" resultType="int"> SELECT COUNT(*) FROM enter_board; </select>
+	<select id="getBoardCount" resultType="int"> 
+		SELECT COUNT(*) FROM enter_board;
+	</select>
 	
 	<select id="getSearchBoardCount" resultType="int">
 		SELECT COUNT(*) FROM enter_Board e

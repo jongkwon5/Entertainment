@@ -45,15 +45,39 @@ button {
 
 /* <!-- ************************메인***************************** --> */
 
+.id_already{
+	display: none;
+	color:red;
+}
+.id_ok{
+	display: none;
+}
+
+.pw_chk{
+	display: none;
+	color:red;
+}
+
+.password_help{
+	font-size: 10px;
+}
+
 .main {
   position: relative;
   width: 600px;
-  height: 680px;
+  height: 500px;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
 
   color: black;
+}
+.id_help{
+	    font-size: 15px;
+    margin-left: 20px;
+}
+.password_help{
+	font-size: 15px;
 }
 #signup_top {
   padding: 0px;
@@ -76,7 +100,7 @@ button {
   width: 95%;
 }
 #signup_box1 input {
-  width: 75%;
+  width: 60%;
 }
 #signup_box1 button {
   float: right;
@@ -124,7 +148,7 @@ button {
 }
 
 .main input {
-  width: 100%;
+  width: 41%;
   height: 46px;
   box-sizing: border-box;
   text-indent: 12px;
