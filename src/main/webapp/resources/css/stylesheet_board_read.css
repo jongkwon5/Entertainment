@@ -14,6 +14,10 @@ body {
 	width: 100%;
 	height: calc(100vh - 120px);
 }
+#board_button{
+
+
+}
 p{
 	
 		font-size:20px;
@@ -51,7 +55,7 @@ hr{
     border-bottom: 1px solid #eee;
 }
 #board_top{
-
+justify-content: space-between;
 	display: flex;
 }
 #board_top > button{
@@ -59,7 +63,7 @@ hr{
 }
 #board_bottom{
 		margin-top: 8px;
-		min-height: 600px;
+		min-height: 400px;
 }
 
 .post-form label {
@@ -142,7 +146,6 @@ td{
     margin-top: 8px;
 
     padding-top: 20px;
-    display: flex;
 }
 
 .comment-form label {

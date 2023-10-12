@@ -18,21 +18,6 @@
     <!-- Style -->
     <link rel="stylesheet" href="${context}/resources/css/style.css">
 </head>
-<style>
-		ul {
-			list-style: none;
-	
-			display: inline-block;
-		}
-		
-		li {
-			float: left;
-			margin-left : 5px;
-			align-self: center;
-		}
-		
-</style>
-
 <body>
 <jsp:include page="/module/header.jsp"></jsp:include>
 	<div class="container">
@@ -51,9 +36,9 @@
            			<thead>
             			<tr>
 			                <th scope="col" style="width:7%;">번호</th>
-			                <th scope="col" style="width:15%;">작성자</th>
+			                <th scope="col" style="width:10%;">작성자</th>
 			                <th scope="col" style="width:25%;">제목</th>
-			                <th scope="col" style="width:15%;">생성일자</th>
+			                <th scope="col" style="width:10%;">생성일자</th>
 			                <th scope="col" style="width:5%;">조회수</th>
             			</tr>
       				</thead>

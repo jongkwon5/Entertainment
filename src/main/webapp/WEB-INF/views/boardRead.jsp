@@ -21,11 +21,13 @@
    		 		<input type="hidden" value="${board.board_user_id}" name="board_user_id">
       			<div id="board_top">
      				<p>${board.board_title}</p>
-     		 		<button type="button" id="allListBT" onclick="location.href='boardList'">전체글</button>
-    		 		<c:if test="${board.board_user_id eq user.id}">
-    		  			<button type="button" id="deleteBT" onclick="deleteButton(event)">글삭제</button>
-    		   			<button type="button" id="updateBT" onclick="location.href='getBoardUpdate?board_number=${board.board_number}'">글수정</button>
-    		 		</c:if>
+     				<div id="board_button">
+	     		 		<button type="button" id="allListBT" onclick="location.href='boardList'">전체글</button>
+	    		 		<c:if test="${board.board_user_id eq user.id}">
+	    		  			<button type="button" id="deleteBT" onclick="deleteButton(event)">글삭제</button>
+	    		   			<button type="button" id="updateBT" onclick="location.href='getBoardUpdate?board_number=${board.board_number}'">글수정</button>
+	    		 		</c:if>
+    		 		</div>
       			</div>
         		<div id="board_middle">${board.board_user_id}&nbsp;&nbsp; | &nbsp;&nbsp;
         			<fmt:formatDate value="${board.board_create_date}" pattern="MM월 dd일 a HH시 mm분" />
@@ -38,7 +40,7 @@
 					<c:choose>
 	            		<c:when test="${empty comment}">
 				            <tr>
-				            	<td colspan="4" style="height: 580px; text-align: center;">작성된 댓글이 없습니다.</td>
+				            	<td colspan="4" style="height: 230px; text-align: center;">작성된 댓글이 없습니다.</td>
 							</tr>
 	            		</c:when>
 	           			<c:otherwise>
@@ -48,12 +50,12 @@
 				            		<td>${comment.comment_user_id}</td>
 				            		<td id="commentText_${comment.comment_number}">${comment.comment_text}</td>
 				            		<td>
-				            			<fmt:formatDate value="${comment.comment_create_date}" pattern="MM월 dd일 a HH시 mm분" />
+				            			<fmt:formatDate value="${comment.comment_create_date}" pattern="MM. dd. a HH시 mm분" />
 				            			<c:if test="${comment.comment_update_count == 1}">(수정됨)</c:if>
 			   						</td>
 				            		<c:if test="${comment.comment_user_id eq user.id}">
-				            			<td><button id="commentUpdate_${comment.comment_number}" onclick="updateComment(${comment.comment_number})">수정하기</button></td>
-				            			<td><button id="commentDelete_${comment.comment_number}" onclick="deleteComment(${comment.comment_number})">삭제하기</button></td>
+				            			<td style="width: 70px;"><button id="commentUpdate_${comment.comment_number}" onclick="updateComment(${comment.comment_number})">수정하기</button></td>
+				            			<td style="width: 70px;"><button id="commentDelete_${comment.comment_number}" onclick="deleteComment(${comment.comment_number})">삭제하기</button></td>
 				            		</c:if>
 				            	</tr> 
 				           	</c:forEach>
@@ -63,7 +65,7 @@
 			</div>
 			<div class="comment-form">
 			    <h2>댓글 작성</h2>
-			    <form action="createComment.do" method="get">
+			    <form action="createComment" method="get">
 			    	<input type="hidden" value="${board.board_number}" name="board_number">
 			    	<input type="hidden" value="${user.id}" name="comment_user_id">
 			        <div class="form-group">
