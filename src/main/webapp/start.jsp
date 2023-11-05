@@ -10,7 +10,7 @@
 </head>
 <body>
 	<script>
-		window.location.href="${path}/main";
+		window.location.href= "${path}/main";
 	</script>
 </body>
 </html>

@@ -2,15 +2,15 @@
 <!DOCTYPE configuration   PUBLIC "-//mybatis.org//DTD Config 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-config.dtd">
 
 <configuration>
-	<properties resource="db.properties"/>
-	<typeAliases>
-		<typeAlias alias="board" type="com.entertain.biz.board.BoardDTO"/>
-		<typeAlias alias="comment" type="com.entertain.biz.board.CommentDTO"/>
-		<typeAlias alias="user" type="com.entertain.biz.user.UserDTO"/>
-	</typeAliases>
-	
-	 <mappers>
-	 	<mapper resource="config/mappings/Board-mapping.xml"/>
-	 	<mapper resource="config/mappings/User-mapping.xml"/>
-	 </mappers>
+    <properties resource="db.properties"/>
+    <typeAliases>
+        <typeAlias alias="board" type="com.entertain.biz.board.BoardDTO"/>
+        <typeAlias alias="comment" type="com.entertain.biz.board.CommentDTO"/>
+        <typeAlias alias="user" type="com.entertain.biz.user.UserDTO"/>
+    </typeAliases>
+
+    <mappers>
+        <mapper resource="config/mappings/Board-mapping.xml"/>
+        <mapper resource="config/mappings/User-mapping.xml"/>
+    </mappers>
 </configuration>
