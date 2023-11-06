@@ -44,7 +44,8 @@
 
 ## 2. 프로젝트 소개
 + 웹 페이지 UI/UX 디자인 구현
-  + HTML/CSS, JavaScript, Bootstrap를 활용하여 메인 페이지, 회사 소개, 게시판, 아티스트 소개, 로그인/회원가입 페이지를 구현하였습니다. 
+  + HTML/CSS, JavaScript, Bootstrap를 활용하여 메인 페이지, 회사 소개, 게시판, 아티스트 소개, 로그인/회원가입 페이지를 구현하였습니다.
+  + Swiper API, Kakao 지도 API, fullPage.js를 사용하여 웹 페이지의 시각적 효과를 향상하였습니다.
 + 게시판 구현
   + MyBatis를 활용하여 게시판 CRUD 및 페이징 기능을 구현하였으며, MySQL DBMS를 통해 게시글 정보를 저장 및 관리하였습니다.
   + AJAX를 활용하여 댓글 수정 및 삭제를 비동기 방식으로 구현하였습니다.
