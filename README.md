@@ -3,11 +3,11 @@
 ![ezgif com-video-to-gif](https://github.com/jongkwon5/Entertainment/assets/137694287/967fc049-04ba-41c9-b871-0c795b8911d4)
 
 ## 🎁 Entertainment Company🎁 
-* 프로젝트명 : Entertainment Company(가상의 Entertainment Company 웹사이트)
-* 프로젝트 목표 :  가상의 엔터테인먼트 회사 웹사이트 개발
-* 개발 인원 : 1명(개인 프로젝트)
-* 개발 구현 : 회사 소개, 아티스트 소개, 게시판, 로그인/회원가입 등 풀스택 개발
-* 프로젝트 기간 : 2023. 06. 07. ~ 2023. 07. 10.
+1. 프로젝트명 : Entertainment Company(가상의 Entertainment Company 웹사이트)
+2. 프로젝트 목표 :  가상의 엔터테인먼트 회사 웹사이트 개발
+3. 개발 인원 : 1명(개인 프로젝트)
+4. 개발 구현 : 회사 소개, 아티스트 소개, 게시판, 로그인/회원가입 등 풀스택 개발
+5. 개발 기간 : 2023. 06. 07. ~ 2023. 07. 10.
 
 ## <span style="color:lightblue; font-style: italic;">🗒️ 목차 🗒️
 - [1.  개발 환경](#1--개발-환경)
